@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-12 form-group">
+    <div class="row form-inline-group form-group">
+      <div class="col-sm-3">
+        <%= f.input :address, label: false, input_html: { value: user.address, class: 'form-control', placeholder: 'Address' } %>
+      </div>
+      <div class="col-sm-3">
+        <%= f.input :city, label: false, input_html: { value: user.city, class: 'form-control', placeholder: 'City' } %>
+      </div>
+      <div class="col-sm-3">
+        <%= f.input :state, label: false, as: :select, collection: us_states, selected: user.state, include_blank: 'State', disabled: [''], input_html: { value: user.state, class: 'form-control' } %>
+      </div>
+      <div class="col-sm-3">
+        <%= f.input :zipcode, label: false, input_html: { value: user.zipcode, class: 'form-control', placeholder: 'Zipcode' } %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<section class="section">
+  <div class="container container-xs">
+    <div class="row">
+      <div class="col-sm-12 page-title">
+        <h1>Create your account</h1>
+      </div>
+    </div>
+    <div class="white-bg-box">
+      <%= simple_form_for(@user, as: :patient_user, url: registration_path(:patient_user)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :type, :as => :hidden, input_html: { :value => 'PatientUser' } %>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :first_name, label: false, required: true, autofocus: true, input_html: { class: 'form-control form-icon icon-name', placeholder: 'First name' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :last_name, label: false, required: true, input_html: { class: 'form-control form-icon icon-name', placeholder: 'Last name' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :password, label: false, required: true, autofocus: true,  hint: ("#{@minimum_password_length} characters minimum" if @validatable), input_html: { class: 'form-control form-icon', placeholder: 'Password' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :password_confirmation, label: false, required: true, input_html: { class: 'form-control form-icon', placeholder: 'Confirm Password' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :email, label: false, required: true, input_html: { class: 'form-control form-icon icon-email', placeholder: 'Email' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :birthdate, label: false, as: :date, input_html: { class: 'form-control' }, wrapper_html: { class: 'date-select' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center double-box-btns">
+            <button type="submit" class="btn btn-warning">Sign up</button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<div class="footer-callout">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 left-side">
+        Need <a href="#">Help</a> booking Online?
+      </div>
+      <div class="col-sm-7 right-side">
+        <a class="phone" href="tel:8559623621">855 962 36 21</a>
+        <a class="envelope" href="mailto:service@medical.booking.com">Service@medical.booking.com</a>
+      </div>
+    </div>
+  </div>
+</div>

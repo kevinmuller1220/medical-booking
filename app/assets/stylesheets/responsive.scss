@@ -1,0 +1,258 @@
+/* Screen width is more then 992px ---------------------------------------------
+ ----------------------------------------------------- */
+
+
+
+@media (min-width: 992px) {
+	.md-more-float-left {
+		float: left;
+	}
+}
+
+
+@media (max-width: 991px) {
+	.header {
+		.site-logo {
+			width: 170px;
+			margin-top: 7px;
+		}
+		.login-box {
+			margin-left: 10px;
+			padding-left: 30px;
+		}
+	}
+	.search-form-section {
+		.form-inline-group {
+			margin-bottom: 15px !important;
+		}
+	}
+	.top-doctors-list {
+		.doctor-box {
+			.doctor-info {
+				padding: 15px 20px;
+				h4 {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+	.blog-list-short {
+		.post-item.bigger {
+			.post-info {
+				padding: 12px 15px;
+				h4 {
+					font-size: 20px;
+					margin: 0 0 8px;
+				}
+				h5 {
+					font-size: 15px;
+					font-weight: 500;
+					margin: 0 0 5px;
+				}
+				.excerpt {
+					margin-top: 0;
+					min-height: 25px;
+				}
+			}
+		}
+	}
+	.week-days {
+		table.week-schedule {
+			text-align: center;
+			tr {
+				td {
+					h6 {
+						padding: 0 8px;
+					}
+					.work-time {
+						padding: 10px 8px 5px;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* Screen width is more then 768px ---------------------------------------------
+ ----------------------------------------------------- */
+
+@media (min-width: 768px) {
+	.sm-float-none {
+		float: none;
+	}
+	.sm-text-left {
+		text-align: left;
+	}
+	.sm-text-right {
+		text-align: right;
+	}
+	.sm-text-center {
+		text-align: center;
+	}
+	/* Form Inline
+	----------------------------------------------------------------------------- */
+	.form-inline-group.row {
+	  margin: 0;
+	  padding: 0;
+	}
+
+	.form-inline-group.row > div {
+	  padding: 0;
+	  margin: 0;
+	}
+
+	.form-inline-group.row > div:not(:last-child):not(:first-child) .form-control,
+	.form-inline-group.row > div:not(:last-child):not(:first-child) .btn {
+	  border-radius: 0;
+	  border-right-color: transparent;
+	}
+
+	.form-inline-group.row > div:last-child .form-control,
+	.form-inline-group.row > div:last-child .btn {
+	  border-top-left-radius: 0;
+	  border-bottom-left-radius: 0;
+	  width: 100%;
+	}
+
+	.form-inline-group.row > div:first-child .form-control,
+	.form-inline-group.row > div:first-child .btn {
+	  border-top-right-radius: 0;
+	  border-bottom-right-radius: 0;
+	  border-right-color: transparent;
+	  width: 100%;
+	}
+}
+
+/* For Mobile Devices (screen many then 768px) ---------------------------------------------
+ ----------------------------------------------------- */
+
+@media (max-width: 767px) {
+	.xs-text-left {
+		text-align: left;
+	}
+	.xs-text-right {
+		text-align: right;
+	}
+	.xs-text-center {
+		text-align: center;
+	}
+	.header {
+		min-height: 60px;
+		padding-top: 10px;
+		.site-logo {
+			margin-left: 15px;
+			margin-bottom: 10px;
+		}
+		.navbar-collapse {
+			width: 100%;
+		}
+		.navbar {
+			min-height: 0;
+			margin-bottom: 0;
+		}
+	}
+	/* Form Inline
+	----------------------------------------------------------------------------- */
+	.form-inline-group.row > div:not(:last-child) .form-control,
+	.form-inline-group.row > div:not(:last-child).btn {
+		margin-bottom: 15px;
+	}
+	.footer-callout {
+		font-size: 14px;
+	}
+	.footer-callout .envelope,
+	.footer-callout .phone {
+		padding-left: 30px;
+		background-size: 20px;
+	}
+	.white-bg-box {
+		padding: 30px 15px;
+		& > hr {
+			margin-left: -15px;
+			margin-right: -15px;
+		}
+	}
+	.time-box {
+		.close-btn {
+			position: absolute;
+			top: -1px;
+			right: 8px;
+		}
+	}
+	.week-days {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+	.gallery-div-box {
+		display: block;
+	}
+}
+
+
+@media (max-width: 599px) {
+
+}
+
+
+@media (max-width: 499px) {
+	.time-box {
+		.close-btn {
+			position: absolute;
+			top: -20px;
+			left: -18px;
+			height: 24px;
+			width: 24px;
+			line-height: 22px;
+			text-align: center;
+			background: #f1f1f1;
+			border-radius: 50%;
+		}
+	}
+	.week-days {
+		table.week-schedule {
+			text-align: center;
+			tr {
+				td {
+					width: 100%;
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+
+/* Only for mobile devices with screen orientation - landscape ---------------------------------------------
+ ----------------------------------------------------- */
+
+@media only screen
+and (max-width : 768px)
+and (orientation : landscape) {
+
+}
+
+/* For Retina---------------------------------------------
+ ----------------------------------------------------- */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+    
+	/* .header .site-logo {
+        background: url("../images/logo@2x.png") no-repeat;
+        background-size: 100%;
+    } */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

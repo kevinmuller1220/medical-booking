@@ -1,0 +1,46 @@
+//
+// Variables (Bootstrap Overrides & More)
+// --------------------------------------------------
+
+//== Colors
+// $white-c:               #fff;
+$red:            #ff7144;
+$red-dark:       darken($red, 15%);;
+// $purple-d:              darken(@purple-c, 10%);
+// $purple-l:              lighten(@purple-c, 15%);
+$body-bg:       #f2f5f7;
+$brand-warning: #ff7043;
+
+$brand-primary: #00b8d4;
+
+$screen-lg:                 1230px;
+$screen-lg-min:             1230px;
+
+$padding-base-vertical:     10px;
+$padding-base-horizontal:   12px;
+
+$padding-large-vertical:    13px;
+$padding-large-horizontal:  16px;
+
+$padding-small-vertical:    5px;
+$padding-small-horizontal:  10px;
+
+$padding-xs-vertical:       1px;
+$padding-xs-horizontal:     5px;
+
+$border-radius-base:        6px;
+
+$font-family-sans-serif:    'Open Sans', sans-serif;
+$headings-font-family:      'Dosis', sans-serif;
+
+$font-size-base:            13px;
+$jumbotron-padding:         10%;
+$jumbotron-bg:              rgba(0,0,0,0);
+
+$nav-link-hover-bg:         rgba(0,0,0,0);
+$input-height-base:         (20 + ($padding-base-vertical * 2) + 2);
+$navbar-padding-vertical:   9px;
+
+$headings-color:            #00b8d4;
+$headings-font-weight:      700;
+$font-size-h1:              36px;

@@ -1,0 +1,252 @@
+.text-left {
+	text-align: left;
+}
+
+// Bootstrap extra customization
+.btn {
+	@include transition-all();
+	border-width: 2px;
+	text-transform: uppercase;
+}
+
+// Bootstrap extra grid customization
+.col-xs-15, .col-sm-15, .col-md-15, .col-lg-15, .col-xs-40, .col-sm-40, .col-md-40, .col-lg-40 {
+	position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.col-xs-15, .col-xs-40 {
+  float: left;
+}
+.col-xs-40 {
+  width: 40%;
+}
+.col-xs-15 {
+  width: 20%;
+}
+@media (min-width: 768px) {
+	.col-sm-15, .col-sm-40 {
+    float: left;
+  }
+	.col-sm-40 {
+    width: 40%;
+  }
+	.col-sm-15 {
+    width: 20%;
+  }
+}
+@media (min-width: 992px) {
+	.col-md-15, .col-md-40 {
+    float: left;
+  }
+	.col-md-40 {
+    width: 40%;
+  }
+	.col-md-15 {
+    width: 20%;
+  }
+}
+@media (min-width: 1230px) {
+	.col-lg-15, .col-md-40 {
+    float: left;
+  }
+	.col-md-40 {
+    width: 40%;
+  }
+	.col-lg-15 {
+      width: 20%;
+  }
+}
+
+/* columns of same height styles */
+
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
+}
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+
+@media (min-width: 480px) {
+  .row-xs-height {
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+  }
+  .col-xs-height {
+    display: table-cell;
+    float: none;
+    height: 100%;
+  }
+  .col-xs-top {
+    vertical-align: top;
+  }
+  .col-xs-middle {
+    vertical-align: middle;
+  }
+  .col-xs-bottom {
+    vertical-align: bottom;
+  }
+}
+
+@media (min-width: 768px) {
+  .row-sm-height {
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+  }
+  .col-sm-height {
+    display: table-cell;
+    float: none;
+    height: 100%;
+  }
+  .col-sm-top {
+    vertical-align: top;
+  }
+  .col-sm-middle {
+    vertical-align: middle;
+  }
+  .col-sm-bottom {
+    vertical-align: bottom;
+  }
+}
+
+@media (min-width: 992px) {
+  .row-md-height {
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+  }
+  .col-md-height {
+    display: table-cell;
+    float: none;
+    height: 100%;
+  }
+  .col-md-top {
+    vertical-align: top;
+  }
+  .col-md-middle {
+    vertical-align: middle;
+  }
+  .col-md-bottom {
+    vertical-align: bottom;
+  }
+}
+
+@media (min-width: 1200px) {
+  .row-lg-height {
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+  }
+  .col-lg-height {
+    display: table-cell;
+    float: none;
+    height: 100%;
+  }
+  .col-lg-top {
+    vertical-align: top;
+  }
+  .col-lg-middle {
+    vertical-align: middle;
+  }
+  .col-lg-bottom {
+    vertical-align: bottom;
+  }
+}
+
+// Header and home landing sections
+.jumbotron {
+	margin-bottom: 0;
+}
+
+.header {
+	&.header_home {
+		background-image: url(<%= asset_path('bg/main-banner.jpg') %>);
+	}
+	&.header_darked {
+		background-color: #404040;
+	}
+}
+
+// Top search bar
+.search-form-section {
+	font-weight: 600;
+}
+.breadcrumbs ul li {
+	font-size: 14px;
+	letter-spacing: 0.05em;
+}
+// Types reset
+h1, .h1, h2, .h2 {
+	font-family: inherit;
+}
+h1, .h1 {
+  margin-bottom: 25px;
+}
+// Registration Form Related
+.time-box {
+	select.form-control {
+		width: 36px;
+		height: 25px;
+		background-position: right 3px center;
+		text-align: left;
+	}
+}
+.flash-messages {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.field_with_errors {
+	.error {
+		color: $brand-warning;
+		margin: 3px 0 15px 0;
+		display: block;
+	}
+}
+
+.date-select {
+	&:after {
+		clear: both;
+		display: table;
+		content: '';
+	}
+	select {
+		margin: 0 2.5%;
+		width: 40%;
+		float: left;
+		&:first-child {
+			margin-left: 0;
+			width:30%;
+		}
+		&:last-child {
+			margin-right: 0;
+			width: 20%;
+		}
+	}
+}
+
+// Schedule table in doctor account page
+.week-days table.week-schedule tr td h6 {
+	margin: 0;
+}

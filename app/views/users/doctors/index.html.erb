@@ -1,0 +1,122 @@
+<%= render partial: 'shared/search_navbar' %>
+<section class="section">
+  <div class="container">
+    <div class="white-bg-box">
+      <div class="marg-both-side-none">
+        <div class="row">
+          <div class="row-height top-row-control">
+            <div class="col-sm-15 col-xs-12 col-height col-middle location-cell">
+              <div class="inside">
+                <div>
+                  <i class="fa fa-map-marker"></i>
+                  <% if signed_in? %>
+                    <%= auth_user.full_address %>
+                  <% else %>
+                    <%= request.location %>
+                    10035, New York, NY
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-40 col-xs-12 col-height col-middle">
+              <div class="inside">
+                <h2 class="dsp-inline-block c-inherit">Top Doctors</h2> &nbsp; &nbsp;
+                <a class="more-link dsp-inline-block" href="#">See All <%= DoctorUser.top_doctors.count %> Doctors</a>
+              </div>
+            </div>
+            <div class="col-sm-40 col-xs-12 col-height col-middle">
+              <div class="inside dropdown-sort-box">
+                <div>
+                  <div class="dropdown hide">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdown_by_popular" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      By Popular <i class="fa fa-angle-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown_by_popular">
+                      <a class="dropdown-item" href="#">Ascending</a>
+                      <a class="dropdown-item" href="#">Descending</a>
+                    </div>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdown_by_name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      By Name <i class="fa fa-angle-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown_by_name">
+                      <%= link_to 'Ascending', doctors_path(@params_name_order_asc), class: 'dropdown-item' %>
+                      <%= link_to 'Descending', doctors_path(@params_name_order_desc), class: 'dropdown-item' %>
+                    </div>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdown_by_distance" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      By Distance <i class="fa fa-angle-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown_by_distance">
+                      <%= link_to 'Nearest', doctors_path(@params_distance_order_asc), class: 'dropdown-item' %>
+                      <%= link_to 'Farthest', doctors_path(@params_distance_order_desc), class: 'dropdown-item' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-height subbnav-box">
+            <% Speciality.top_specialties.each do |speciality| %>
+              <div class="col-sm-15 col-xs-12 col-height col-middle active">
+                <div class="inside">
+                  <div class="sublink-box">
+                    <%= link_to doctors_path(speciality_id: speciality.id) do %>
+                      <%= speciality.name %> <i class="fa fa-angle-right"></i>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="booking-table">
+        <% @doctors.each do |doctor| %>
+          <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+              <div class="img">
+                <%= image_tag doctor.avatar(:medium), alt: doctor.full_name %>
+              </div>
+              <%= link_to "find out more", doctor_path(doctor), class: "btn btn-info btn-outline btn-block" %>
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+              <div class="row">
+                <div class="col-md-8 col-sm-7 col-xs-12 info-box">
+                  <h3><%= doctor.full_name %></h3>
+                  <div>
+                    <div class="stars-box">
+                      <span class="star star-5"></span>
+                      <span class="star star-4 active"></span>
+                      <span class="star star-3"></span>
+                      <span class="star star-2"></span>
+                      <span class="star star-1"></span>
+                    </div>
+                    <a class="review-count" href="#"><%= doctor.reviews.count %> reviews</a>
+                  </div>
+                  <div class="location"><%= doctor.full_address %></div>
+                  <div class="location-time"> 35 minutes , from your location</div>
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-12">
+                  <div class="map-box">
+                    <div class="marker" data-lat="<%= doctor.latitude %>" data-lng="<%= doctor.longitude %>"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <%= excerpt(doctor.bio) %>
+                  <%= link_to "find out more", doctor_path(doctor), class: "more-link" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

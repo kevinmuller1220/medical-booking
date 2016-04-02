@@ -1,0 +1,102 @@
+<section class="section">
+  <div class="container container-lg">
+    <div class="white-bg-box booking-box xs-text-center">
+      <div class="row">
+        <div class="col-sm-9 push-bot-10">
+          <h1 class="h2 dsp-inline-block">Dr. <%= @user.full_name %></h1>
+          <div class="review-s dsp-inline-block">
+            <% if @user.house_calls %>Does at home visits<% end %>
+          </div>
+        </div>
+        <div class="col-sm-3 sm-text-right xs-text-center push-bot-10">
+          <% if signed_in? %>
+            <% if auth_user != @user %>
+              <a class="btn btn-success btn-sm" href="#"> <i class="fa fa-calendar"></i> Schedule</a>
+            <% end %>
+          <% else %>
+            <% link_to "#popup_login", class: 'btn btn-success btn-sm popup-modal' do %>
+              <i class="fa fa-calendar"></i> Schedule
+            <% end %>
+            <a class="btn btn-success btn-sm popup-modal" href="#popup_login"> <i class="fa fa-calendar"></i> Schedule</a>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <div class="row subtitle-location-section">
+        <div class="col-sm-6">
+          <h2><i class="fa fa-heartbeat"></i> <%= @user.speciality %></h2>
+        </div>
+        <div class="col-sm-6">
+          <p class="location sm-text-right xs-text-center"><i class="fa fa-map-marker"></i> <%= @user.full_address %></p>
+        </div>
+      </div>
+      <div class="row gallery-div-box">
+        <div class="col-sm-5 col-xs-12">
+          <div class="row zoom-gallery">
+            <div class="col-xs-6">
+              <div class="single-carousel">
+                <a href="<%= asset_url(@user.avatar(:medium)) %>"><%= image_tag @user.avatar(:medium), alt: @user.full_name, width: "220", height: "220" %></a>
+              </div>
+            </div>
+            <div class="col-xs-6 gallery-grid">
+              <!-- <a href="images/img-105x105-1.jpg"><img src="images/img-105x105-1.jpg" height="105" width="105" alt=""></a>
+              <a href="images/img-105x105-2.jpg"><img src="images/img-105x105-2.jpg" height="105" width="105" alt=""></a>
+              <a href="images/img-105x105-3.jpg"><img src="images/img-105x105-3.jpg" height="105" width="105" alt=""></a>
+              <a href="images/img-105x105-4.jpg"><img src="images/img-105x105-4.jpg" height="105" width="105" alt=""></a> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7 col-xs-12">
+          <div class="map-box">
+            <div class="marker" data-lat="<%= @user.latitude %>" data-lng="<%= @user.longitude %>"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Doctor's Bio</h3>
+          <%= @user.bio %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Schedule</h3>
+        </div>
+      </div>
+      <div class="week-days">
+        <table class="week-schedule">
+          <tr>
+            <% Date::DAYNAMES.each_with_index do |day,index| %>
+              <% if @user.days.include?(index.to_s) %>
+                <td>
+                  <h6><%= day %></h6>
+                  <div class="work-time">
+                    <%= formatted_time(@user.hours_from, true) %> - <br><%= formatted_time(@user.hours_to, true) %>
+                  </div>
+                </td>
+              <% else %>
+                <td class="not-work">
+                  <h6><%= day %></h6>
+                  <div class="work-time"><span class="big-text">×</span></div>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<% if @calendar_list.present? %>
+  <table>
+  <% @calendar_list.items.each do |calendar| %>
+  <tr>
+    <td><%= calendar.summary %></td>
+    <td><%= calendar.description %></td>
+    <td><%= calendar.location %></td>
+    <td><%= calendar.start.date_time %></td>
+    <td><%= calendar.end.date_time %></td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

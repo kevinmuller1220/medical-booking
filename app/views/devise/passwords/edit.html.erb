@@ -1,0 +1,38 @@
+<div class="opacity-popup-block register-popup">
+	<div class="white-opacity-box">
+    <h2>Change your password</h2>
+		<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.error_notification %>
+          <%= f.input :reset_password_token, as: :hidden %>
+          <%= f.full_error :reset_password_token %>
+        </div>
+      </div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+            <%= f.input :password, label: false, required: true, autofocus: true, input_html: { class: 'form-control', placeholder: 'New password' } %>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+            <%= f.input :password_confirmation, label: false, required: true, input_html: { class: 'form-control', placeholder: 'Confirm password' } %>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 push-top-20 push-bot-10">
+					<button type="submit" class="btn btn-danger btn-block btn-sm">Change my password</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<p>Don't have an account? <a class="popup-modal" href="#popup_signup">Sign up</a></p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

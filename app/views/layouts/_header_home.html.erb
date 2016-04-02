@@ -1,0 +1,19 @@
+<%= render partial: 'layouts/header_default' %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <img src="<%= asset_path('logo-medical-booking@x2.png') %>">
+        <h3>We will help you feel better, The result is: - Enjoy life more!</h3>
+        <a href="<%= new_doctor_user_registration_path %>" class="btn btn-white btn-lg">Register doctor account</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="search-form-section">
+  <div class="container container-md">
+    <div class="row">
+      <%= render partial: 'shared/doctor_search_form' %>
+    </div>
+  </div>
+</div>

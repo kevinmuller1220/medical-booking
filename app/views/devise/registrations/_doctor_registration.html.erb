@@ -1,0 +1,142 @@
+<section class="section">
+  <div class="container container-xs">
+    <div class="row">
+      <div class="col-sm-12 page-title">
+        <h1>Register your Doctor's office account</h1>
+      </div>
+    </div>
+    <div class="white-bg-box">
+      <%= simple_form_for(@user, as: :doctor_user, url: registration_path(:doctor_user)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :type, :as => :hidden, input_html: { :value => 'DoctorUser' } %>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :first_name, label: false, required: true, autofocus: true, input_html: { class: 'form-control form-icon icon-name', placeholder: 'First name' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :last_name, label: false, required: true, input_html: { class: 'form-control form-icon icon-name', placeholder: 'Last name' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :password, label: false, required: true, autofocus: true,  hint: ("#{@minimum_password_length} characters minimum" if @validatable), input_html: { class: 'form-control form-icon', placeholder: 'Password' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :password_confirmation, label: false, required: true, input_html: { class: 'form-control form-icon', placeholder: 'Confirm Password' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :email, label: false, required: true, input_html: { class: 'form-control form-icon icon-email', placeholder: 'Email' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :bizname, label: false, input_html: { class: 'form-control form-icon icon-bizname', placeholder: 'Biz. Name' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :phone, label: false, input_html: { class: 'form-control form-icon icon-phone', placeholder: 'Phone' } %>
+          </div>
+          <%= f.simple_fields_for :doctor_info do |df| %>
+            <div class="col-sm-6 form-group">
+              <%= df.input :speciality_id, label: false, collection: specialities_collection, prompt: "Select your speciality", input_html: { class: 'form-control' } %>
+            </div>
+          <% end %>
+        </div>
+        <%= f.simple_fields_for :doctor_info do |df| %>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <%= df.input :website, label: false, input_html: { class: 'form-control form-icon icon-website', placeholder: 'Your current website' } %>
+            </div>
+            <div class="col-sm-6 form-group">
+              <div class="checkbox">
+  							<%= df.check_box :house_calls, as: :boolean %>
+  							<%= df.label :house_calls, 'Make house-calls' %>
+  						</div>
+            </div>
+          </div>
+        <% end %>
+        <%= render 'shared/address_fields', :f => f, :user => @user %>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h3 class="push-top-40 push-bot-50">Set open hours and days</h3>
+          </div>
+        </div>
+        <%= render 'shared/days_fields', :f => f %>
+        <%= render 'shared/open_hours_fields', :f => f %>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-danger btn-outline">Start free trial</button>
+            <a class="btn btn-danger" href="#">Premium</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container container-xs">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="price-panel">
+          <h4>Free</h4>
+          <ul>
+            <li>Benefit one</li>
+            <li>Benefit two</li>
+            <li>Benefit three</li>
+          </ul>
+          <p class="price">$20</p>
+          <div>
+            <a class="btn btn-outline" href="#">Start free trial</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="price-panel">
+          <h4>Standard</h4>
+          <ul>
+            <li>Benefit one</li>
+            <li>Benefit two</li>
+            <li>Benefit three</li>
+            <li>Benefit four</li>
+          </ul>
+          <div>
+            <p class="price">$20</p>
+            <a class="btn" href="#">Free</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="price-panel">
+          <h4>Premium</h4>
+          <ul>
+            <li>Benefit one</li>
+            <li>Benefit two</li>
+            <li>Benefit three</li>
+            <li>Benefit four</li>
+            <li>Benefit five</li>
+          </ul>
+          <div>
+            <p class="price">$30</p>
+            <a class="btn" href="#">Free</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-callout">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 left-side">
+        Need <a href="#">Help</a> booking Online?
+      </div>
+      <div class="col-sm-7 right-side">
+        <a class="phone" href="tel:8559623621">855 962 36 21</a>
+        <a class="envelope" href="mailto:service@medical.booking.com">Service@medical.booking.com</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<%= render partial: 'shared/search_navbar' %>
+
+<section class="section">
+  <div class="container container-lg">
+    <div class="row">
+      <div class="col-sm-12 page-title">
+        <h1>Upcoming bookings</h1>
+      </div>
+    </div>
+    <% if @upcoming_bookings.empty? %>
+      <div class="text-center">
+        You have no upcomming bookings.
+      </div>
+    <% end %>
+    <% @upcoming_bookings.each do |ub| %>
+      <div class="white-bg-box booking-box xs-text-center">
+        <div class="row">
+          <div class="col-sm-4 push-bot-10">
+            <h3 class="h2"> <i class="fa fa-user-md"></i><%= ub.reason %></h3>
+          </div>
+          <div class="col-sm-4 text-center push-bot-10">
+            <div class="book-date">
+              <div class="date"><%= ub.appointment_date %></div>
+              <div class="time"><%= formatted_time(ub.started_at) %> - <%= formatted_time(ub.ended_at) %></div>
+            </div>
+            <a class="btn-edit btn-circle btn-success" href="#"><i class="fa fa-pencil"></i></a>
+          </div>
+          <div class="col-sm-4 sm-text-right xs-text-center push-bot-10">
+            <a class="btn btn-success btn-sm" href="#">Re-scheduled</a>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="doctor-info xs-text-center">
+              <div class="doctor-photo">
+                <div class="img">
+                  <a class="btn-circle btn-danger notify" href="#"><i class="fa fa-bell"></i></i></a>
+                  <%= image_tag ub.doctor.avatar(:medium), alt: ub.doctor.full_name %>
+                </div>
+              </div>
+              <h4><%= ub.doctor.full_name %></h4>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            <div class="map-box">
+              <div class="marker" data-lat="<%= ub.doctor.latitude %>" data-lng="<%= ub.doctor.longitude %>"></div>
+            </div>
+          </div>
+        </div>
+        <%= link_to "×", appointment_path(ub), method: :delete, remote: true, class: "btn-close btn-circle btn-danger", data: {confirm: 'Are you sure to delete?'} %>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-12 page-title">
+        <h2 class="h1">Past bookings</h2>
+      </div>
+    </div>
+    <% if @past_appointments.empty? %>
+      <div class="text-center">
+        You have no past appointments.
+      </div>
+    <% else %>
+      <div class="white-bg-box visited-booking-box">
+        <% @past_appointments.each do |pa| %>
+          <% doctor = pa.doctor %>
+          <div class="row booking-item">
+            <div class="col-lg-4 col-sm-3 col-xs-12">
+              <div class="doctor-info">
+                <div class="doctor-photo md-more-float-left">
+                  <div class="img">
+                    <%= image_tag doctor.avatar(:medium), alt: doctor.full_name %>
+                  </div>
+                </div>
+                <h4><%= doctor.full_name %></h4>
+                <div class="stars-box">
+                  <span class="star star-5"></span>
+                  <span class="star star-4 active"></span>
+                  <span class="star star-3"></span>
+                  <span class="star star-2"></span>
+                  <span class="star star-1"></span>
+                </div>
+                <a class="review-count" href="#"><%= doctor.reviews.count %> reviews</a>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-9 col-xs-12 visit-info">
+              <div class="row subtitles">
+                <div class="col-sm-2">Visit date</div>
+                <div class="col-sm-2">Start time</div>
+                <div class="col-sm-2">End time</div>
+                <div class="col-sm-3">Speciality</div>
+                <div class="col-sm-3">Reason</div>
+              </div>
+              <div class="row visitad-data">
+                <div class="col-sm-2"><%= formatted_date(pa.appointment_date) %></div>
+                <div class="col-sm-2"><%= formatted_time(pa.started_at, true) %></div>
+                <div class="col-sm-2"><%= formatted_time(pa.ended_at, true) %></div>
+                <div class="col-sm-3"><%= doctor.speciality %></div>
+                <div class="col-sm-3"><%= pa.reason %></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <a class="more-link-block" href="#">Read more <i class="fa fa-angle-down"></i></a>
+      </div>
+    <% end %>
+  </div>
+</section>

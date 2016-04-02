@@ -1,0 +1,61 @@
+<div class="opacity-popup-block register-popup">
+	<div class="white-opacity-box">
+    <h2>Log in</h2>
+		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			<div class="row">
+				<div class="col-sm-12">
+					<p>
+						<a class="btn btn-sm btn-block btn-soc btn-facebook" href="#">
+							<i class="fa fa-facebook"></i>
+							<span>Login with Facebook</span>
+						</a>
+					</p>
+					<p>
+						<%= link_to(omniauth_authorize_path(:google_oauth2), class: 'btn btn-block btn-sm btn-soc btn-google', target: '_blank') do %>
+							<i class="fa fa-google-plus"></i>
+							<span>Login with Google</span>
+						<% end %>
+					</p>
+					<h5><span>or</span></h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<%= f.email_field :email, required: false, class: 'form-control', placeholder: 'Email'  %>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<%= f.password_field :password, required: false, placeholder: 'Password', class: 'form-control' %>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="checkbox">
+						<div class="checkbox">
+							<%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
+							<%= f.label :remember_me %>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 text-right">
+					<small><a class="dark-link popup-modal" href="#popup_reset_password">Forgot password?</a></small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 push-top-20 push-bot-10">
+					<button type="submit" class="btn btn-danger btn-block btn-sm">Log in</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<p>Don't have an account? <a class="popup-modal" href="#popup_signup">Sign up</a></p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

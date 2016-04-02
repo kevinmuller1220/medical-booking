@@ -1,0 +1,24 @@
+<%= f.simple_fields_for :doctor_info do |df| %>
+<div class="time-boxes push-bot-30">
+  <div class="clearfix time-box">
+  	<div class="col-sm-3 col-xs-4">
+  	</div>
+  	<div class="col-sm-6 col-xs-8">
+  		<div class="row time-inputs">
+  			<div class="col-xs-5">
+  				<div class="form-inline">
+            <%= df.input :hours_from, label: false, input_html: { class: 'form-control input-xs' }%>
+  				</div>
+  			</div>
+  			<div class="col-xs-2"><span>to</span></div>
+  			<div class="col-xs-5">
+  				<div class="form-inline">
+            <%= df.input :hours_to, label: false, input_html: { class: 'form-control input-xs' }%>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	<!--<div class="col-sm-3 text-right"><%= link_to_remove_association '×', f, class: 'close-btn' %></div>-->
+  </div>
+</div>
+<% end %>

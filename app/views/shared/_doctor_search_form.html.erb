@@ -1,0 +1,32 @@
+<%= form_tag doctors_path, :method => 'get', :class => "form-search" do %>
+  <div class="col-md-4">
+    <div class="row form-inline-group form-group">
+      <div class="col-sm-4">
+        <%= text_field_tag :zipcode, params[:zipcode], placeholder: "Zipcode", class: "form-control" %>
+      </div>
+      <div class="col-sm-4">
+        <%= text_field_tag :city, params[:city], placeholder: "City", class: "form-control" %>
+      </div>
+      <div class="col-sm-4">
+        <%= text_field_tag :state, params[:state], placeholder: "State", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="row form-inline-group form-group">
+      <div class="col-sm-5">
+        <%= select_tag :speciality_id, options_for_select(specialities_collection, params[:speciality_id]), prompt: "Search by speciality...", placeholder: "Search by speciality...",
+        class: "form-control" %>
+      </div>
+      <div class="col-sm-2">
+        <%= datepicker_helper 'appointment_date', params[:appointment_date], 'appointment_date' %>
+      </div>
+      <div class="col-sm-2">
+        <%= text_field_tag :appointment_time, params[:appointment_time], :placeholder => "Time", :class => "form-control input-arrow timepicker ui-timepicker-input", autocomplete: 'off' %>
+      </div>
+      <div class="col-sm-3">
+        <button type="submit" class="btn btn-warning">Find a doctor</button>
+      </div>
+    </div>
+  </div>
+<% end %>

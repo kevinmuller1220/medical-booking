@@ -1,0 +1,39 @@
+<div id="popup_signup" class="opacity-popup-block register-popup mfp-hide">
+	<div class="white-opacity-box">
+		<form>
+			<div class="row">
+				<div class="col-sm-12">
+					<p>
+						<a class="btn btn-sm btn-block btn-soc btn-facebook" href="#">
+							<i class="fa fa-facebook"></i>
+							<span>Login with Facebook</span>
+						</a>
+					</p>
+					<p>
+						<%= link_to(omniauth_authorize_path(:google_oauth2), class: 'btn btn-block btn-sm btn-soc btn-google') do %>
+							<i class="fa fa-google-plus"></i>
+							<span>Login with Google</span>
+						<% end %>
+					</p>
+					<h5><span>or</span></h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 push-bot-10">
+					<a class="btn btn-danger btn-block btn-sm" href="<%= new_patient_user_registration_path %>">Sign up with Email</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<p>By signing up I agree to Medical Booking <a href="#">Terms of Service</a></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<hr>
+					<p>Already an Medical Booking member? <a class="popup-modal" href="#popup_login">Log in</a></p>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

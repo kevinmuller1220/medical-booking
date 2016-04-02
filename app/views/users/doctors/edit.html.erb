@@ -1,0 +1,146 @@
+<section class="section">
+  <div class="container container-xs">
+    <div class="row">
+      <div class="col-sm-12 page-title">
+        <h1>You on MedicalBooking.com</h1>
+        <p class="subtitle">This information appears next to your revies and helps other people get to know you. Changing your info here will also change it on your past contributions. </p>
+      </div>
+    </div>
+    <div class="white-bg-box patient-login">
+      <%= simple_form_for @user, url: doctor_path(@user), method: :put do |f| %>
+        <div class="row">
+          <div class="col-sm-12 push-bot-30">
+            <h2>Profile</h2>
+          </div>
+        </div>
+        <div class="row avatar-editor">
+          <div class="col-sm-3">
+            <div class="avatar push-bot-30">
+              <%= image_tag @user.avatar(:medium), alt: @user.full_name, class: 'avatar-img' %>
+              <%= f.input :avatar, label: false, as: :file, input_html: { class: 'hidden avatar-input', accept: 'image/*' } %>
+            </div>
+          </div>
+          <div class="col-sm-7 push-bot-30">
+            <p><a class="btn btn-danger btn-w" href="javascript:;" onClick="$('#doctor_user_avatar').click();">Change</a></p>
+            <p><a class="link-info" href="#">i</a> The first thing people see is your photo, so show them your best side!</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :first_name, input_html: { value: @user.first_name, class: 'form-control', placeholder: 'First Name' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :last_name, input_html: { value: @user.last_name, class: 'form-control', placeholder: 'Last Name' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 push-bot-20">
+            <p><a class="link-info" href="#">i</a> Your unique display name can be updated as often as you like.</p>
+          </div>
+        </div>
+        <div class="row">
+          <%= f.simple_fields_for :doctor_info do |df| %>
+            <%= df.input :id, as: :hidden %>
+            <div class="col-sm-6 form-group">
+              <%= df.input :speciality_id, collection: specialities_collection, prompt: "Select your speciality", input_html: { class: 'form-control' } %>
+            </div>
+            <div class="col-sm-6 form-group">
+              <%= df.input :website, input_html: { class: 'form-control form-icon icon-website', placeholder: 'Your current website' } %>
+            </div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <%= f.input :phone, input_html: { class: 'form-control form-icon icon-phone', placeholder: 'Phone' } %>
+          </div>
+          <div class="col-sm-6 form-group">
+            <%= f.input :bizname, input_html: { class: 'form-control form-icon icon-bizname', placeholder: 'Biz. Name' } %>
+          </div>
+        </div>
+        <%= f.simple_fields_for :doctor_info do |df| %>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <div class="checkbox">
+  							<%= df.check_box :house_calls, as: :boolean %>
+  							<%= df.label :house_calls, 'Make house-calls' %>
+  						</div>
+            </div>
+          </div>
+        <% end %>
+        <%= render 'shared/address_fields', :f => f, :user => @user %>
+        <div class="row">
+          <div class="col-sm-12 push-bot-20">
+            <p><a class="link-info" href="#">i</a> People are curious about where you are from.</p>
+          </div>
+        </div>
+        <%= f.simple_fields_for :doctor_info do |df| %>
+        <div class="row push-bot-30">
+          <div class="col-sm-12 form-group">
+            <%= df.input :bio, as: :text, input_html: { rows: 10, class: 'form-control', placeholder: 'Bio' } %>
+          </div>
+        </div>
+        <% end %>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h3 class="push-top-40 push-bot-50">Set open hours and days</h3>
+          </div>
+        </div>
+        <%= render 'shared/days_fields', :f => f %>
+        <%= render 'shared/open_hours_fields', :f => f %>
+        <% omniauth_providers.each do |(provider, provider_text)| %>
+          <% if identity = @user.identities.find_by_provider(provider) %>
+            <div class="row">
+              <div class="col-sm-12">
+                <h2>Google Account</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <div class="avatar avatar-md push-bot-20">
+                  <%= image_tag identity.image, alt: identity.full_name %>
+                </div>
+              </div>
+              <div class="col-sm-10 push-bot-20">
+                <p><%= link_to 'Disconnect', disconnect_identity_doctor_path(provider: identity.provider), class: "btn btn-default btn-w" %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 push-bot-30">
+                <p>Your account is connected to Google Account. We’ll never post without your permission.</p>
+              </div>
+            </div>
+          <% else %>
+            <p><%= link_to "Connect to #{provider_text}", omniauth_authorize_path(action: provider), class: "btn btn-default btn-w" %></p>
+          <% end %>
+        <% end %>
+        <div class="row push-bot-40">
+          <div class="col-sm-12">
+            <h2>Notification</h2>
+            <div class="form-group">
+              <div class="checkbox">
+                <input type="checkbox" id="checkbox1">
+                <label for="checkbox1">
+                  Subscribe to news Medical Booking
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <input type="checkbox" id="checkbox2">
+                <label for="checkbox2">
+                  Notify the patient via e-mail 12 hours before the appointment
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center double-box-btns">
+            <button type="submit" class="btn btn-danger">Save</button>
+            <a class="btn btn-default" href="<%= account_path %>">Cancel</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

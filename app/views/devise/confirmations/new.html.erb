@@ -1,0 +1,26 @@
+<div id="popup_reset_password" class="opacity-popup-block register-popup">
+	<div class="white-opacity-box">
+		<div class="popup-title">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Resend confirmation instructions</h2>
+				</div>
+			</div>
+		</div>
+		<p>Enter the email address associated with your account and we will send you a link to reconfirm your email.</p>
+		<div class="push-top-30 push-bot-10">
+			<%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.error_notification %>
+        <%= f.full_error :confirmation_token %>
+				<div class="row form-inline-group form-group">
+					<div class="col-sm-8">
+            <%= f.input :email, label: false, required: true, autofocus: true, input_html: { class: 'form-control input-sm email-icon', placeholder: 'Email' }%>
+					</div>
+					<div class="col-sm-4">
+						<button type="submit" class="btn btn-warning btn-sm">Resend confirmation</button>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
