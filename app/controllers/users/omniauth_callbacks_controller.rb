@@ -10,7 +10,6 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def google_oauth2
-    puts 'here-first'
     puts request.env["omniauth.auth"]
     auth = request.env['omniauth.auth']
     @identity = Identity.find_with_omniauth(auth)

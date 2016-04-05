@@ -1,14 +1,22 @@
+<%= content_for(:head_extra) do %>
+<style type="text/css">
+body {
+  background-image: url(<%= asset_path('bg/main-banner.jpg') %>);
+  background-size: cover;
+}
+</style>
+<% end %>
 <section class="section">
   <div class="container container-xs">
     <div class="row">
       <div class="col-sm-12 page-title">
-        <h1>Register your Doctor's office account</h1>
+        <h1 style="color:white;">Register your Doctor's office account</h1>
       </div>
     </div>
     <div class="white-bg-box">
       <%= simple_form_for(@user, as: :doctor_user, url: registration_path(:doctor_user)) do |f| %>
         <%= f.error_notification %>
-        <%= f.input :type, :as => :hidden, input_html: { :value => 'DoctorUser' } %>
+        <%= f.input :type, as: :hidden, input_html: { :value => 'DoctorUser' } %>
         <div class="row">
           <div class="col-sm-6 form-group">
             <%= f.input :first_name, label: false, required: true, autofocus: true, input_html: { class: 'form-control form-icon icon-name', placeholder: 'First name' } %>
@@ -66,15 +74,15 @@
         <%= render 'shared/open_hours_fields', :f => f %>
         <div class="row">
           <div class="col-sm-12 text-center">
-            <button type="submit" class="btn btn-danger btn-outline">Start free trial</button>
-            <a class="btn btn-danger" href="#">Premium</a>
+            <button type="submit" class="btn btn-primary btn-outline">Create your account</button>
+            <!--<a class="btn btn-danger" href="#">Premium</a>-->
           </div>
         </div>
       <% end %>
     </div>
   </div>
 </section>
-
+<!--
 <section>
   <div class="container container-xs">
     <div class="row">
@@ -126,17 +134,4 @@
     </div>
   </div>
 </section>
-
-<div class="footer-callout">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-5 left-side">
-        Need <a href="#">Help</a> booking Online?
-      </div>
-      <div class="col-sm-7 right-side">
-        <a class="phone" href="tel:8559623621">855 962 36 21</a>
-        <a class="envelope" href="mailto:service@medical.booking.com">Service@medical.booking.com</a>
-      </div>
-    </div>
-  </div>
-</div>
+-->

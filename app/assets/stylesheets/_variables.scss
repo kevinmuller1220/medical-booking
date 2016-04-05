@@ -9,9 +9,13 @@ $red-dark:       darken($red, 15%);;
 // $purple-d:              darken(@purple-c, 10%);
 // $purple-l:              lighten(@purple-c, 15%);
 $body-bg:       #f2f5f7;
-$brand-warning: #ff7043;
+$brand-warning: #b1956e;
+$brand-danger:  #ff7144;
+$brand-primary: #b1956e;
 
-$brand-primary: #00b8d4;
+$text-color:    #595959;
+$link-color:            $brand-primary;
+$link-hover-color:      #ded2c1;
 
 $screen-lg:                 1230px;
 $screen-lg-min:             1230px;
@@ -31,7 +35,7 @@ $padding-xs-horizontal:     5px;
 $border-radius-base:        6px;
 
 $font-family-sans-serif:    'Open Sans', sans-serif;
-$headings-font-family:      'Dosis', sans-serif;
+$headings-font-family:      'Open Sans', sans-serif; //'Dosis', sans-serif;
 
 $font-size-base:            13px;
 $jumbotron-padding:         10%;
@@ -41,6 +45,14 @@ $nav-link-hover-bg:         rgba(0,0,0,0);
 $input-height-base:         (20 + ($padding-base-vertical * 2) + 2);
 $navbar-padding-vertical:   9px;
 
-$headings-color:            #00b8d4;
+$headings-color:            $brand-primary;
+
 $headings-font-weight:      700;
 $font-size-h1:              36px;
+$font-size-h2:              36px;
+$font-size-h3:              20px;
+$font-size-h4:              19px;
+$font-size-h5:              18px;
+$font-size-h6:              12px;
+
+$input-border-focus:        $brand-primary !default;

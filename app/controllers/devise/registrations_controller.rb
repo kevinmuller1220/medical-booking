@@ -17,12 +17,13 @@ class Devise::RegistrationsController < Devise::SessionsController
       @user = klass.new(user_params)
       # binding.pry
       if @user.save
+        flash[:alert] = "Check your email to complete the sign-up process."
         return redirect_to account_url
       else
         redirect_to :back
       end
     else
-      flash[:error] = "User already exists with the email."
+      flash[:error] = "A user has already been created with that email."
       redirect_to :back
     end
   end

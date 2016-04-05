@@ -1,12 +1,193 @@
 <section class="section">
-  <div class="container container-xs">
+  <div class="container container-lg">
+    <% if @pending_bookings.present? %>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="h1">Pending appointments</h2>
+        </div>
+      </div>
+      <% @pending_bookings.each do |pb| %>
+        <div class="white-bg-box book-upcoming">
+          <div class="row">
+            <div class="col-sm-4">
+              <h4 class="h4"> <i class="fa fa-user-md"></i> <%= pb.patient_user.full_name %></h4>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-2 sm-push-right sm-text-center">
+              <div class="img">
+                <i class="fa fa-bell"></i>
+                <%= image_tag pb.patient_user.avatar(:medium), alt: pb.patient_user.full_name %>
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p><b>Patient visit</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= formatted_date(pb.from) %></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= formatted_time(pb.from) %></p>
+                </div>
+              </div>
+              <div class="row">
+                <% if pb.doctor_user.house_calls %>
+                <div class="col-sm-3">
+                  <p><b>Address</b></p>
+                </div>
+                <div class="col-sm-8">
+                  <p><%= pb.patient_user.full_address %></p>
+                </div>
+                <% else %>
+                <div class="col-sm-3">
+                  <p><b>Contact</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= pb.patient_user.email %></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= pb.patient_user.phone %></p>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12 sm-text-right">
+              <%= button_to approve_appointment_path(id: pb.id), remote: true, method: :post, class: 'btn btn-primary btn-outline approve-appointment' do %>
+                <i class="fa fa fa-check"></i> &nbsp; Accept the visit
+              <% end %>
+              <!--<a class="btn btn-success btn-outline" href="#"> <i class="fa fa-pencil"></i> &nbsp; Reschedule</a>-->
+              <%= button_to cancel_appointment_path(id: pb.id), remote: true, method: :post, class: 'btn btn-danger btn-outline cancel-appointment' do %>
+                <i class="fa fa fa-times"></i> &nbsp; Cancel the visit
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if @upcoming_bookings.present? %>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="h1">Upcoming bookings</h2>
+        </div>
+      </div>
+      <% @upcoming_bookings.each do |ub| %>
+        <div class="white-bg-box book-upcoming">
+          <div class="row">
+            <div class="col-sm-4">
+              <h4 class="h4"> <i class="fa fa-user-md"></i> <%= ub.patient_user.full_name %></h4>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-2 sm-push-right sm-text-center">
+              <div class="img">
+                <i class="fa fa-bell"></i>
+                <%= image_tag ub.patient_user.avatar(:medium), alt: ub.patient_user.full_name %>
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p><b>Patient visit</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= formatted_date(ub.from) %></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= formatted_time(ub.from) %></p>
+                </div>
+              </div>
+              <div class="row">
+                <% if ub.doctor_user.house_calls %>
+                <div class="col-sm-3">
+                  <p><b>Address</b></p>
+                </div>
+                <div class="col-sm-8">
+                  <p><%= ub.patient_user.full_address %></p>
+                </div>
+                <% else %>
+                <div class="col-sm-3">
+                  <p><b>Contact</b></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= ub.patient_user.email %></p>
+                </div>
+                <div class="col-sm-4">
+                  <p><%= ub.patient_user.phone %></p>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12 sm-text-right">
+              <!--<a class="btn btn-success btn-outline" href="#"> <i class="fa fa-pencil"></i> &nbsp; Reschedule</a>-->
+              <%= button_to cancel_appointment_path(id: ub.id), remote: true, method: :post, class: 'btn btn-danger btn-outline cancel-appointment' do %>
+                <i class="fa fa fa-times"></i> &nbsp; Cancel the visit
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if @past_appointments.present? %>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="h1">Past bookings</h2>
+        </div>
+      </div>
+      <div class="white-bg-box visited-booking-box">
+        <% @past_appointments.each do |pa| %>
+          <div class="row booking-item">
+            <div class="col-sm-3 col-xs-12">
+              <div class="doctor-info">
+                <div class="doctor-photo md-more-float-left">
+                  <div class="img">
+                    <%= image_tag pa.patient_user.avatar(:medium), alt: pa.patient_user.full_name %>
+                  </div>
+                </div>
+                <h5><%= pa.patient_user.full_name %></h5>
+              </div>
+            </div>
+            <div class="col-sm-9 col-xs-12 visit-info">
+              <div class="row subtitles">
+                <div class="col-sm-2">Visit date</div>
+                <div class="col-sm-2">Start time</div>
+                <div class="col-sm-2">End time</div>
+                <div class="col-sm-2">Speciality</div>
+                <div class="col-sm-2">Status</div>
+                <div class="col-sm-2">Note</div>
+              </div>
+              <div class="row visitad-data">
+                <div class="col-sm-2"><%= formatted_date(pa.from) %></div>
+                <div class="col-sm-2"><%= formatted_time(pa.from) %></div>
+                <div class="col-sm-2"><%= formatted_time(pa.to)%></div>
+                <div class="col-sm-2"><%= pa.doctor_user.speciality %></div>
+                <div class="col-sm-2"><%= pa.status %></div>
+                <div class="col-sm-2"><%= pa.title %></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <!--<a class="more-link-block" href="#">Read more <i class="fa fa-angle-down"></i></a>-->
+      </div>
+    <% end %>
     <div class="row">
-      <div class="col-sm-12 page-title">
-        <h1>You on MedicalBooking.com</h1>
-        <p class="subtitle">This information appears next to your revies and helps other people get to know you. Changing your info here will also change it on your past contributions. </p>
+      <div class="col-sm-12">
+        <h2 class="h1">Doctor's account</h2>
       </div>
     </div>
-    <div class="white-bg-box patient-login">
+
+    <div class="white-bg-box">
       <%= simple_form_for @user, url: doctor_path(@user), method: :put do |f| %>
         <div class="row">
           <div class="col-sm-12 push-bot-30">
@@ -21,7 +202,7 @@
             </div>
           </div>
           <div class="col-sm-7 push-bot-30">
-            <p><a class="btn btn-danger btn-w" href="javascript:;" onClick="$('#doctor_user_avatar').click();">Change</a></p>
+            <p><a class="btn btn-primary btn-w" href="javascript:;" onClick="$('#doctor_user_avatar').click();">Change</a></p>
             <p><a class="link-info" href="#">i</a> The first thing people see is your photo, so show them your best side!</p>
           </div>
         </div>
@@ -91,7 +272,7 @@
           <% if identity = @user.identities.find_by_provider(provider) %>
             <div class="row">
               <div class="col-sm-12">
-                <h2>Google Account</h2>
+                <h2><%= provider_text %> Account</h2>
               </div>
             </div>
             <div class="row">
@@ -102,41 +283,26 @@
               </div>
               <div class="col-sm-10 push-bot-20">
                 <p><%= link_to 'Disconnect', disconnect_identity_doctor_path(provider: identity.provider), class: "btn btn-default btn-w" %></p>
+                <% if identity.provider == 'google_oauth2' %>
+                  <p><%= link_to "Import from #{provider_text} Calendar",
+                    import_from_google_calendar_doctor_path(action: provider),
+                    class: "btn btn-default btn-w", data:{confirm: 'Are you sure to import from Google Calendar?'} %></p>
+                <% end %>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12 push-bot-30">
-                <p>Your account is connected to Google Account. We’ll never post without your permission.</p>
+                <p>Your account is connected to <%= provider_text %> Account. We’ll never post without your permission.</p>
               </div>
             </div>
           <% else %>
             <p><%= link_to "Connect to #{provider_text}", omniauth_authorize_path(action: provider), class: "btn btn-default btn-w" %></p>
           <% end %>
         <% end %>
-        <div class="row push-bot-40">
-          <div class="col-sm-12">
-            <h2>Notification</h2>
-            <div class="form-group">
-              <div class="checkbox">
-                <input type="checkbox" id="checkbox1">
-                <label for="checkbox1">
-                  Subscribe to news Medical Booking
-                </label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="checkbox">
-                <input type="checkbox" id="checkbox2">
-                <label for="checkbox2">
-                  Notify the patient via e-mail 12 hours before the appointment
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div class="row">
           <div class="col-sm-12 text-center double-box-btns">
-            <button type="submit" class="btn btn-danger">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-default" href="<%= account_path %>">Cancel</a>
           </div>
         </div>
@@ -144,3 +310,17 @@
     </div>
   </div>
 </section>
+
+<% content_for(:footer_extra) do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.approve-appointment, .cancel-appointment').closest('.button_to').on('ajax:beforeSend', function(e, data, status, xhr) {
+        $(this).closest('.book-upcoming').fadeTo(300, 0.3);
+      });
+
+      $('.approve-appointment, .cancel-appointment').closest('.button_to').on('ajax:complete', function(e, data, status, xhr) {
+        $(this).closest('.book-upcoming').slideUp(300);
+      });
+    })
+  </script>
+<% end %>

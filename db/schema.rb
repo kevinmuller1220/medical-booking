@@ -11,33 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331185609) do
+ActiveRecord::Schema.define(version: 20160403164836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "appointments", force: :cascade do |t|
-    t.integer  "doctor_user_id"
-    t.integer  "patient_user_id"
-    t.datetime "appointment_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "reason"
-    t.time     "started_at"
-    t.time     "ended_at"
-    t.string   "subject"
-  end
-
-  add_index "appointments", ["doctor_user_id"], name: "index_appointments_on_doctor_user_id", using: :btree
-  add_index "appointments", ["patient_user_id"], name: "index_appointments_on_patient_user_id", using: :btree
-
   create_table "booked_hours", force: :cascade do |t|
     t.integer  "doctor_user_id"
+    t.integer  "patient_user_id"
     t.string   "title"
     t.datetime "from"
     t.datetime "to"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",          default: 0
   end
 
   create_table "doctor_infos", force: :cascade do |t|
@@ -60,6 +47,8 @@ ActiveRecord::Schema.define(version: 20160331185609) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "image"
+    t.string   "token"
+    t.datetime "expires_at"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -161,6 +150,7 @@ ActiveRecord::Schema.define(version: 20160331185609) do
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   add_foreign_key "booked_hours", "users", column: "doctor_user_id"
+  add_foreign_key "booked_hours", "users", column: "patient_user_id"
   add_foreign_key "doctor_infos", "users", column: "doctor_user_id"
   add_foreign_key "open_hours", "users", column: "doctor_user_id"
   add_foreign_key "services", "specialities"

@@ -20,6 +20,14 @@ module ApplicationHelper
     current_user || current_doctor_user || current_patient_user
   end
 
+  def patient_signed_in?
+    signed_in? && auth_user.type == 'PatientUser'
+  end
+
+  def doctor_signed_in?
+    signed_in? && auth_user.type == 'DoctorUser'
+  end
+
   def us_states
     [
       ['Alabama', 'AL'],
@@ -119,7 +127,7 @@ module ApplicationHelper
     when 'error'
       'danger'
     else
-      'info'
+      'primary'
     end
   end
 

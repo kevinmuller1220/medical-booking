@@ -1,61 +1,59 @@
 class AppointmentsController < ApplicationController
   respond_to :json, :html
 
-  def index
-    @appointments = Appointment.all
-    render json: @appointments
-  end
-
   def create
-    @doctor = User.find(params[:users][:id])
-    @app = auth_user.appointments.build(appointment_date: DateTime.strptime(params[:appointments][:appointment_date], '%m/%d/%Y %I:%M %p'), doctor_user_id: params[:users][:id], reason: appointments_params[:reason], subject: appointments_params[:subject] )
+    @app = BookedHour.new(appointments_params)
     if @app.save
-      render json: {data: {appointment: @app, status: :ok}}
+      render json: {data: {appointment: @app, status: :success}}
     else
       render json: { staus: 400, message: @app.errors }
     end
   end
 
-  def show
-    @appointment = Appointment.find(params[:id])
-    render json: @appointment
-  end
-
   def update
-    @app = Appointment.find(params[:id])
-    @app.appointment_date = DateTime.strptime(params[:appointments][:appointment_date], '%m/%d/%Y %I:%M %P')
-    @app.reason = appointments_params[:reason] unless appointments_params[:reason].nil?
-    @app.subject = appointments_params[:subject] unless appointments_params[:subject].nil?
+    @app = BookedHour.find(params[:id])
+    @app.from = appointments_params[:from] unless appointments_params[:from].nil?
+    @app.to = appointments_params[:to] unless appointments_params[:to].nil?
+    @app.title = appointments_params[:title] unless appointments_params[:title].nil?
     binding.pry
     if @app.save
-      render json: {data: {appointment: @app, status: :ok}}
+      render json: {data: {appointment: @app}, status: :success}
     else
-      render json: {data: {erros: @app.errors, status: 404}}
+      render json: {data: {errors: @app.errors}, status: :fail}
     end
   end
 
-  def import_to_google_calendar
-    @app = Appointment.find(params[:id])
-    omniauth = request.env['omniauth.auth']
-    @gc = GoogleCalendar.new(session[:token])
-    @gc.create_event(@app)
-    redirect_to :back
-  end
-
-  def re_schedule
-  end
-
   def destroy
-    @appointment = Appointment.find(params[:id])
-    if @appointment.destroy
-      render json: { status: :ok }
+    @app = BookedHour.find(params[:id])
+    if patient_signed_in? && @app.destroy
+      render json: {data: {appointment: @app}, status: :success}
     else
-      render json: { status: 400, message: "Not deleted" }
+      render json: {status: :fail}
+    end
+  end
+
+  def approve
+    if doctor_signed_in?
+      @app = BookedHour.find(params[:id])
+      @app.approved!
+      render json: {data: {appointment: @app}, status: :success}
+    else
+      render json: {status: :fail}
+    end
+  end
+
+  def cancel
+    if doctor_signed_in?
+      @app = BookedHour.find(params[:id])
+      @app.canceled!
+      render json: {data: {appointment: @app}, status: :success}
+    else
+      render json: {status: :fail}
     end
   end
 
   private
   def appointments_params
-    params.require(:appointments).permit(:id, :appointment_date, :patient_user_id, :doctor_user_id, :reason, :subject)
+    params.require(:booked_hour).permit(:id, :from, :to, :doctor_user_id, :patient_user_id, :title)
   end
 end

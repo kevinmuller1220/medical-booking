@@ -1,33 +1,59 @@
+<%= content_for(:head_extra) do %>
+<style type="text/css">
+body {
+  background-color: white;
+}
+</style>
+<% end %>
+
 <section class="section">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 section-title">
 				<h2>Top categories</h2>
-				<h5>Ribeye cupim fatback tail &amp; bacon pork </h5>
+				<h5>Selected Services", sub-headline to "Our convenient booking interface connects to our base of pre-selected providers for minimally invasive aesthetic procedures from the comfort of your home, office, or at the provider facility, seamlessly.</h5>
 			</div>
 		</div>
 		<div class="row top-categories-grid">
-			<div class="col-sm-8" style="background-image: url(<%= asset_path('categories/top-1.jpg') %>);">
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-4.jpg') %>);">
 				<div class="box-default">
 					<div class="vertical-align">
-						<h3>Hair Treatments</h3>
+						<h3>Wrinkle Reduction</h3>
 					</div>
 				</div>
 				<div class="box-hover">
 					<div class="vertical-align">
-						<p class="cat-title">Hair Treatments</p>
+						<p class="cat-title">Wrinkle Reduction</p>
 						<div class="cat-descript">
-							Short loin picanha beef ribs, turkey flank
-							bal kielbasa. Pork bely pastrami sirloin
-							pare ribs tip. Pork loin doner ham sausage
-							drumstick sausage. Pig drumstick cupim
-							round, shankle ham cow leberkas t-bone
+							Facial wrinkles can be prevented with simple treatments with little
+							to no downtime. Leading products such as Botox and Dysport can help
+							to slow down the aging process through wrinkle reduction by temporarily
+							weakening the muscles that cause the wrinkles to appear.
 						</div>
-						<a href="#" class="btn btn-border-white">find out more</a>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 1), class: 'btn btn-border-white' %>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-2.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Dermal Fillers</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Dermal Fillers</p>
+						<div class="cat-descript">
+							During the aging process volume loss of the face typically occurs.  This makes
+							you appear tired and sad.  Dermal fillers are used to immediately enhance and
+							restore lost volume and turn back the aging process.  Commonly treated areas
+							are the cheeks, lips, temples, nasolabial folds, and jawline.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 2), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-3.jpg') %>);">
 				<div class="box-default">
 					<div class="vertical-align">
 						<h3>Skin Treatments</h3>
@@ -37,73 +63,64 @@
 					<div class="vertical-align">
 						<p class="cat-title">Skin Treatments</p>
 						<div class="cat-descript">
-							Short loin picanha beef ribs, turkey flank
-							bal kielbasa. Pork bely pastrami sirloin
-							pare ribs tip. Pork loin doner ham sausage
-							drumstick sausage. Pig drumstick cupim
-							round, shankle ham cow leberkas t-bone
+							Multiple options exist to help eliminate fine lines and wrinkles of the face,
+							as well as skin damage from sun exposure.  With the use of chemical peels,
+							laser resurfacing, and micro-needling the aging process can be reversed.
 						</div>
-						<a href="#" class="btn btn-border-white">find out more</a>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 3), class: 'btn btn-border-white' %>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-3.jpg') %>);">
 				<div class="box-default">
 					<div class="vertical-align">
-						<h3>Botox</h3>
+						<h3>Non Surgical Fat Reduction</h3>
 					</div>
 				</div>
 				<div class="box-hover">
 					<div class="vertical-align">
-						<p class="cat-title">Botox</p>
+						<p class="cat-title">Non Surgical Fat Reduction</p>
 						<div class="cat-descript">
-							Short loin picanha beef ribs, turkey flank
-							bal kielbasa. Pork bely pastrami sirloin
-							pare ribs tip. Pork loin doner ham sausage
-							drumstick sausage. Pig drumstick cupim
-							round, shankle ham cow leberkas t-bone
+							Need to get rid of unwanted body fat and do not have the time for surgery?
+							Try these modalities to lose a few inches for a slimmer you.
 						</div>
-						<a href="#" class="btn btn-border-white">find out more</a>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 4), class: 'btn btn-border-white' %>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-4.jpg') %>);">
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-1.jpg') %>);">
 				<div class="box-default">
 					<div class="vertical-align">
-						<h3>Massage</h3>
+						<h3>Hair reduction</h3>
 					</div>
 				</div>
 				<div class="box-hover">
 					<div class="vertical-align">
-						<p class="cat-title">Massage</p>
+						<p class="cat-title">Hair reduction</p>
 						<div class="cat-descript">
-							Short loin picanha beef ribs, turkey flank
-							bal kielbasa. Pork bely pastrami sirloin
-							pare ribs tip. Pork loin doner ham sausage
-							drumstick sausage. Pig drumstick cupim
-							round, shankle ham cow leberkas t-bone
+							Do you have unwanted hair loss that you wish you could reverse.
+							With minimal invasive procedures you can have a full head of hair in no time.
+							These procedures are done with minimal anesthesia and require very little recovery.
 						</div>
-						<a href="#" class="btn btn-border-white">find out more</a>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 5), class: 'btn btn-border-white' %>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-5.jpg') %>);">
 				<div class="box-default">
 					<div class="vertical-align">
-						<h3>Botox &amp; dermal fillers</h3>
+						<h3>Cellulite and Vein Treatment</h3>
 					</div>
 				</div>
 				<div class="box-hover">
 					<div class="vertical-align">
-						<p class="cat-title">Botox &amp; dermal fillers</p>
+						<p class="cat-title">Cellulite and Vein Treatment</p>
 						<div class="cat-descript">
-							Short loin picanha beef ribs, turkey flank
-							bal kielbasa. Pork bely pastrami sirloin
-							pare ribs tip. Pork loin doner ham sausage
-							drumstick sausage. Pig drumstick cupim
-							round, shankle ham cow leberkas t-bone
+							Are you looking to get rid of unsightly cellulite and prominent veins
+							for a smooth leg appearance?  Multiple treatments options exist to
+							help to maintain a youthful look and restore your skins appearance.
 						</div>
-						<a href="#" class="btn btn-border-white">find out more</a>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 6), class: 'btn btn-border-white' %>
 					</div>
 				</div>
 			</div>
@@ -115,7 +132,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 section-title">
-				<h2>About the service</h2>
+				<h2>About Somlos</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -124,66 +141,33 @@
 					<div class="icon"><img src="<%= asset_path('icon-1.png') %>" alt="icon" width="90"></div>
 					<h3>24/7 availability</h3>
 					<div class="descript">
-						<p>Ham hock short loin capicola ba sirloin pastrami.
-						Beef ribs tri-tip landjaeger sausage, ham doner
-						chuck pork belly. Alcatra turducken ball tip
-						hamburger, beef ribs corned beef kielbasa
-						biltong shank. Landjaeger fatback cow hambur.</p>
+						<p>Simple, convenient, &amp; seamless. Schedule your appointment
+							and treatment with the provider of your choice on your time.
+							Be able to evaluate provider’s qualifications and track record
+							with our dynamic review process.  See all availabilities across
+							your location with geotargeting technology and choose ideal time
+							slots and providers according to your schedule. </p>
 					</div>
 				</div>
 				<div class="feature-box">
 					<div class="icon"><img src="<%= asset_path('icon-2.png') %>" alt="icon" width="90"></div>
 					<h3>Advanced technology</h3>
 					<div class="descript">
-						<p>Prosciutto ribeye beef sirloin pork fatback strip
-						steak bacon filet mignon pork loin picanha spare
-						ribs. Ham salami pancetta kevin spare ribs. Kevin
-						short ribs t-bone fatback pastrami boudin short
-						loin spare ribs pig tri-tip shank ham hock picanh.</p>
+						<p>Follow the latest trends and techniques in cosmetic surgery and
+							how providers are using them to enhance overall results.
+							See provider reviews and schedule your appointment.
+							Be able to pay for service prior to your visit to have a seamless
+							visit and cost savings via our rewards program.</p>
 					</div>
 				</div>
 				<div class="feature-box">
 					<div class="icon"><img src="<%= asset_path('icon-3.png') %>" alt="icon" width="90"></div>
-					<h3>Quakified doctors</h3>
+					<h3>Qualified doctors</h3>
 					<div class="descript">
-						<p>Turkey shank pancetta ham hock pork pastrami
-						pork loin prosciutto. Filet mignon landjaeger ball
-						capicola frankfurter, porchetta drumstick jowle
-						boudin pork belly bresaola cow pig alcatra tip.
-						Rump tenderloin sausage beeef ribs.</p>
-					</div>
-				</div>
-				<div class="feature-box">
-					<div class="icon"><img src="<%= asset_path('icon-1.png') %>" alt="icon" width="90"></div>
-					<h3>24/7 availability</h3>
-					<div class="descript">
-						<p>Ham hock short loin capicola ba sirloin pastrami.
-						Beef ribs tri-tip landjaeger sausage, ham doner
-						chuck pork belly. Alcatra turducken ball tip
-						hamburger, beef ribs corned beef kielbasa
-						biltong shank. Landjaeger fatback cow hambur.</p>
-					</div>
-				</div>
-				<div class="feature-box">
-					<div class="icon"><img src="<%= asset_path('icon-2.png') %>" alt="icon" width="90"></div>
-					<h3>Advanced technology</h3>
-					<div class="descript">
-						<p>Prosciutto ribeye beef sirloin pork fatback strip
-						steak bacon filet mignon pork loin picanha spare
-						ribs. Ham salami pancetta kevin spare ribs. Kevin
-						short ribs t-bone fatback pastrami boudin short
-						loin spare ribs pig tri-tip shank ham hock picanh.</p>
-					</div>
-				</div>
-				<div class="feature-box">
-					<div class="icon"><img src="<%= asset_path('icon-3.png') %>" alt="icon" width="90"></div>
-					<h3>Quakified doctors</h3>
-					<div class="descript">
-						<p>Turkey shank pancetta ham hock pork pastrami
-						pork loin prosciutto. Filet mignon landjaeger ball
-						capicola frankfurter, porchetta drumstick jowle
-						boudin pork belly bresaola cow pig alcatra tip.
-						Rump tenderloin sausage beeef ribs.</p>
+						<p>Our base of providers perform procedures using state of the art equipment,
+							board certified physicians and/or work with a board certified physician.
+							Each provider must practice within their scope of care and pass the SÖMLÖS
+							excellence of care to be selected as a SÖMLÖS provider.</p>
 					</div>
 				</div>
 			</div>
@@ -196,96 +180,38 @@
 		<div class="row">
 			<div class="col-md-12 section-title">
 				<h2>Top Doctors</h2>
-				<h5>Best of the best Doctors ever</h5>
+				<h5>Our Top Doctors are certified Somlos professionals</h5>
 			</div>
 		</div>
 		<div class="row top-doctors-list">
-			<div class="col-sm-3">
-				<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-1.jpg') %>);">
-					<div class="doctor-info">
-						<h4>Doctor Dre</h4>
-						<p class="vocation">Dermatologist</p>
-						<div class="hover">
-							<div class="stars-box">
-								<span class="star star-5 active"></span>
-								<span class="star star-4"></span>
-								<span class="star star-3"></span>
-								<span class="star star-2"></span>
-								<span class="star star-1"></span>
+			<% DoctorUser.by_top_doctors(true).each_with_index do |doctor, index| %>
+				<% if index >= 4 then break end %>
+				<div class="col-sm-3">
+					<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-' << (index+1).to_s << '.jpg') %>);">
+						<div class="doctor-info">
+							<h4>Dr. <%= doctor.full_name %></h4>
+							<p class="vocation"><%= doctor.speciality %></p>
+							<div class="hover">
+								<!--<div class="stars-box">
+									<span class="star star-5 active"></span>
+									<span class="star star-4"></span>
+									<span class="star star-3"></span>
+									<span class="star star-2"></span>
+									<span class="star star-1"></span>
+								</div>-->
+								<p class="address"><%= doctor.full_address %></p>
+								<div class="map-wrap">
+									<div class="map-box">
+										<div class="marker" data-lat="<%= doctor.latitude %>" data-lng="<%= doctor.longitude %>"></div>
+									</div>
+								</div>
+								<div class="location-time">35 minutes , from your location</div>
+								<p><a class="btn btn-border-white" href="<%= doctor_path(doctor) %>">find out more</a></p>
 							</div>
-							<p class="address">51 Central PaW, New York, NY 10023</p>
-							<div class="map-wrap"><img src="<%= asset_path('map-img.png') %>" width="233" alt=""></div>
-							<div class="location-time">35 minutes , from your location</div>
-							<p><a class="btn btn-border-white" href="#">find out more</a></p>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-2.jpg') %>);">
-					<div class="doctor-info">
-						<h4>Dr. Jade Ramoray</h4>
-						<p class="vocation">Plastic surgeon</p>
-						<div class="hover">
-							<div class="stars-box">
-								<span class="star star-5 active"></span>
-								<span class="star star-4"></span>
-								<span class="star star-3"></span>
-								<span class="star star-2"></span>
-								<span class="star star-1"></span>
-							</div>
-							<p class="address">51 Central PaW, New York, NY 10023</p>
-							<div class="map-wrap"><img src="<%= asset_path('map-img.png') %>" width="233" alt=""></div>
-							<div class="location-time">35 minutes , from your location</div>
-							<p><a class="btn btn-border-white" href="#">find out more</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-3.jpg') %>);">
-					<div class="doctor-info">
-						<h4>Doc Nicole Raimondo</h4>
-						<p class="vocation">Cosmetologist</p>
-						<div class="hover">
-							<div class="stars-box">
-								<span class="star star-5 active"></span>
-								<span class="star star-4"></span>
-								<span class="star star-3"></span>
-								<span class="star star-2"></span>
-								<span class="star star-1"></span>
-							</div>
-							<p class="address">51 Central PaW, New York, NY 10023</p>
-							<div class="map-wrap"><img src="<%= asset_path('map-img.png') %>" width="233" alt=""></div>
-							<div class="location-time">35 minutes , from your location</div>
-							<p><a class="btn btn-border-white" href="#">find out more</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-4.jpg') %>);">
-
-				</style>>
-					<div class="doctor-info">
-						<h4>Dr. Minato Kawasaki</h4>
-						<p class="vocation">Masseur</p>
-						<div class="hover">
-							<div class="stars-box">
-								<span class="star star-5 active"></span>
-								<span class="star star-4"></span>
-								<span class="star star-3"></span>
-								<span class="star star-2"></span>
-								<span class="star star-1"></span>
-							</div>
-							<p class="address">51 Central PaW, New York, NY 10023</p>
-							<div class="map-wrap"><img src="<%= asset_path('map-img.png') %>" width="233" alt=""></div>
-							<div class="location-time">35 minutes , from your location</div>
-							<p><a class="btn btn-border-white" href="#">find out more</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
+			<% end %>
 		</div>
 	</div>
 </section>
@@ -307,10 +233,10 @@
 						</div>
 					</a>
 					<div class="post-info">
-						<h4><a href="#">Rump tenderloin sausage</a></h4>
-						<div class="excerpt">Ham hock short loin capicola ba sirloin
-						short loin spare ribs pig tri-tip shank ham
-						jowl boudin pork belly cow pig...</div>
+						<h4><a href="#">Example Blog post</a></h4>
+						<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Ut enim ad minim veniam ...</div>
 						<a class="more-link" href="#">Read more</a>
 					</div>
 				</div>
@@ -325,10 +251,10 @@
 						</div>
 					</a>
 					<div class="post-info">
-						<h4><a href="#">Tenderloin cupim chuck chicken</a></h4>
-						<div class="excerpt">Ham hock short loin flank beef ribs ball tip
-						filet mignon beef kielbasa swine leberkas
-						jowl boudin prosciutto drumstick bacon...</div>
+						<h4><a href="#">Example Blog post</a></h4>
+						<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Ut enim ad minim veniam ...</div>
 						<a class="more-link" href="#">Read more</a>
 					</div>
 				</div>
@@ -343,10 +269,10 @@
 						</div>
 					</a>
 					<div class="post-info">
-						<h4><a href="#">Tenderloin cupim chuck chicken</a></h4>
-						<div class="excerpt">Frankfurter short ribs prosciutto venison
-						pancetta t-bone. filet mignon beef kielbasa
-						owl boudin prosciutto loin tail...</div>
+						<h4><a href="#">Example Blog post</a></h4>
+						<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Ut enim ad minim veniam ...</div>
 						<a class="more-link" href="#">Read more</a>
 					</div>
 				</div>
@@ -373,17 +299,3 @@
 		</div>
 	</div>
 </section>
-
-<div class="footer-callout">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-5 left-side">
-				Need <a href="#">Help</a> booking Online?
-			</div>
-			<div class="col-sm-7 right-side">
-				<a class="phone" href="tel:8559623621">855 962 36 21</a>
-				<a class="envelope" href="mailto:service@medical.booking.com">Service@medical.booking.com</a>
-			</div>
-		</div>
-	</div>
-</div>

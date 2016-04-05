@@ -1,9 +1,17 @@
+<%= content_for(:head_extra) do %>
+<style type="text/css">
+body {
+  background-image: url(<%= asset_path('bg/main-banner.jpg') %>);
+  background-size: cover;
+}
+</style>
+<% end %>
 <section class="section">
   <div class="container container-xs">
     <div class="row">
       <div class="col-sm-12 page-title">
-        <h1>You on MedicalBooking.com</h1>
-        <p class="subtitle">This information appears next to your revies and helps other people get to know you. Changing your info here will also change it on your past contributions. </p>
+        <h1 style="color:white">You on MedicalBooking.com</h1>
+        <p class="subtitle" style="color:white">This information appears next to your revies and helps other people get to know you. Changing your info here will also change it on your past contributions. </p>
       </div>
     </div>
     <div class="white-bg-box patient-login">
@@ -21,7 +29,7 @@
             </div>
           </div>
           <div class="col-sm-7 push-bot-30">
-            <p><a class="btn btn-danger btn-w" href="javascript:;" onClick="$('#patient_user_avatar').click();">Change</a></p>
+            <p><a class="btn btn-primary btn-w" href="javascript:;" onClick="$('#patient_user_avatar').click();">Change</a></p>
             <p><a class="link-info" href="#">i</a> The first thing people see is your photo, so show them your best side!</p>
           </div>
         </div>
@@ -48,7 +56,7 @@
           <% if identity = @user.identities.find_by_provider(provider) %>
             <div class="row">
               <div class="col-sm-12">
-                <h2>Google Account</h2>
+                <h2><%= provider_text %> Account</h2>
               </div>
             </div>
             <div class="row">
@@ -63,7 +71,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12 push-bot-30">
-                <p>Your account is connected to Google Account. We’ll never post without your permission.</p>
+                <p>Your account is connected to <%= provider_text %> Account. We’ll never post without your permission.</p>
               </div>
             </div>
           <% else %>
@@ -93,7 +101,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 text-center double-box-btns">
-            <button type="submit" class="btn btn-danger">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-default" href="<%= account_path %>">Cancel</a>
           </div>
         </div>

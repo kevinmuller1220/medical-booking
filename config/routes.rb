@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
 
   resources :doctors, path: "/doctors", controller: 'users/doctors' do
+    get :import_from_google_calendar, on: :member, path: '/import_from_google_calendar', as: :import_from_google_calendar
     get :disconnect_identity, on: :member, path: '/disconnect_identity', as: :disconnect_identity
+    get :booked_hours, on: :member, path: '/booked_hours', as: :booked_hours
   end
 
   resources :patients, path: "/patients", controller: 'users/patients', except: [:index] do
     get :disconnect_identity, on: :member, path: '/disconnect_identity', as: :disconnect_identity
   end
 
-  resources :appointments do
-    post :import_to_google_calendar, on: :member, path: '/import', as: :google_import
+  resources :appointments, except: [:index, :show, :edit] do
+    post :approve, on: :member, path: '/approve', as: :approve
+    post :cancel, on: :member, path: '/cancel', as: :cancel
   end
 
   devise_for :patient_users, controllers: {:sessions  => "users/sessions"}#, skip: :sessions

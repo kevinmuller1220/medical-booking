@@ -2,7 +2,8 @@ require 'google/apis/calendar_v3'
 
 class Users::DoctorsController < ApplicationController
   before_filter :search_params, only: [:index]
-  before_filter :verify_auth_user, except: [:index, :show]
+  before_filter :verify_auth_user, except: [:index, :show, :booked_hours]
+
   def index
     @doctors = DoctorUser.all
     filters = search_params.reject{|k, v| v.blank? || k == 'name_order' || k == 'distance_order' }
@@ -12,7 +13,6 @@ class Users::DoctorsController < ApplicationController
       end
       @doctors = @doctors.send("by_#{key}", value)
     end
-
     if search_params[:name_order].present?
       @doctors = @doctors.send("by_name_order", search_params[:name_order])
     end
@@ -29,31 +29,22 @@ class Users::DoctorsController < ApplicationController
 
   def show
     @user = DoctorUser.find(params[:id])
-    @hidden_days = ((1..7).to_a - @user.days.map(&:to_i)).to_s
-    params[:header_template] = 'header_darked'
-
-    if session[:token].present?
-      client = Signet::OAuth2::Client.new(access_token: session[:token])
-      service = Google::Apis::CalendarV3::CalendarService.new
-      service.authorization = client
-      limit = 1000
-      now = Time.now.iso8601
-      page_token = nil
-      @calendar_list = service.list_events(
-        'primary',
-        max_results: [limit, 100].min,
-        single_events: true,
-        order_by: 'startTime',
-        time_min: now,
-        time_max: (Time.now + 7.days).iso8601,
-        page_token: page_token,
-        fields: 'items(id,summary,start,end),next_page_token'
+    if patient_signed_in?
+      @hidden_days = ((0..6).to_a - @user.days.map(&:to_i)).to_s
+      @reasons = Service.where(:speciality_id => @user.doctor_info.speciality_id).collect{ |s| [ s.name, s.name ] }
+      @appointment = BookedHour.new(
+        doctor_user_id: @user.id,
+        patient_user_id: auth_user.id,
       )
     end
+    params[:header_template] = 'header_darked'
   end
 
   def edit
     @user = DoctorUser.find(params[:id])
+    @upcoming_bookings = @user.upcoming_appointments
+    @pending_bookings = @user.pending_appointments
+    @past_appointments = @user.past_appointments
     params[:header_template] = 'header_darked'
   end
 
@@ -62,8 +53,18 @@ class Users::DoctorsController < ApplicationController
     if @user.update_attributes(doctor_params)
       redirect_to :back
     else
-      render 'settings'
+      redirect_to action: 'edit'
     end
+  end
+
+  def import_from_google_calendar
+    @user = DoctorUser.find(params[:id])
+    if @user.import_from_google_calendar
+      flash[:notice] = 'Successfully imported from Google Calendar'
+    else
+      flash[:error] = 'Failed imported from Google Calendar'
+    end
+    redirect_to action: 'edit'
   end
 
   def disconnect_identity
@@ -79,11 +80,17 @@ class Users::DoctorsController < ApplicationController
     redirect_to action: 'edit'
   end
 
+  def booked_hours
+    @user = DoctorUser.find(params[:id])
+    @reserved_hours = @user.fullcalender_booked_hours
+    render json: @reserved_hours
+  end
+
   private
   def search_params
     params.permit(:zipcode, :city, :state, :speciality, :speciality_id,
       :appointment_date, :appointment_period, :appointment_time,
-      :name_order, :distance_order)
+      :name_order, :distance_order, :top_doctors)
   end
 
   def doctor_params
@@ -102,10 +109,14 @@ class Users::DoctorsController < ApplicationController
     @params_name_order_desc = search_params.dup
     @params_distance_order_asc = search_params.dup
     @params_distance_order_desc = search_params.dup
+    @params_top_doctors = search_params.dup
+    @params_all_doctors = search_params.dup
 
     @params_name_order_asc[:name_order] = 'asc'
     @params_distance_order_asc[:distance_order] = 'asc'
     @params_name_order_desc[:name_order] = 'desc'
     @params_distance_order_desc[:distance_order] = 'desc'
+    @params_top_doctors[:top_doctors] = true
+    @params_all_doctors[:top_doctors] = false
   end
 end

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   belongs_to :role
-  has_many :identities
+  has_many :identities, dependent: :delete_all
 
   geocoded_by :full_address
 

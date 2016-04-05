@@ -8,8 +8,8 @@
 
 
 #creating predefine Roles
-first_names = %w(Brian John Drake Michael Bred Tony)
-last_names = %w(Doe Donald Michael Sandy William Bred)
+first_names = %w(Brian Jade Nicole Minato Bred Tony)
+last_names = %w(Dre Jade Raimondo Kawasaki William Bred)
 bio_text = '<p>After qualifying as a specialist in 1960, Kevorkian bounced around the country
     from hospital to hospital, publishing more than 30 professional journal articles and
     booklets about his philosophy on death, before setting up his own clinic near Detroit,

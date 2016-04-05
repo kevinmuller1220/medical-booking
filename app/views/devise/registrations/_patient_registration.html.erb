@@ -1,8 +1,16 @@
+<%= content_for(:head_extra) do %>
+<style type="text/css">
+body {
+  background-image: url(<%= asset_path('bg/main-banner.jpg') %>);
+  background-size: cover;
+}
+</style>
+<% end %>
 <section class="section">
   <div class="container container-xs">
     <div class="row">
       <div class="col-sm-12 page-title">
-        <h1>Create your account</h1>
+        <h1 style="color: white;">Create your account</h1>
       </div>
     </div>
     <div class="white-bg-box">
@@ -38,21 +46,10 @@
             <button type="submit" class="btn btn-warning">Sign up</button>
           </div>
         </div>
+        <div class="push-top-30 text-center">
+          Want to set up a Doctor account? <a href="<%= new_doctor_user_registration_path %>">Click here</a>.
+        </div>
       <% end %>
     </div>
   </div>
 </section>
-
-<div class="footer-callout">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-5 left-side">
-        Need <a href="#">Help</a> booking Online?
-      </div>
-      <div class="col-sm-7 right-side">
-        <a class="phone" href="tel:8559623621">855 962 36 21</a>
-        <a class="envelope" href="mailto:service@medical.booking.com">Service@medical.booking.com</a>
-      </div>
-    </div>
-  </div>
-</div>

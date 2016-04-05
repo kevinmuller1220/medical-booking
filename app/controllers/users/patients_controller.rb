@@ -1,9 +1,10 @@
 class Users::PatientsController < ApplicationController
   before_filter :verify_auth_user
   def show
-    @user = User.find(params[:id])
-    @upcoming_bookings = @user.appointments.upcoming_appointments
-    @past_appointments = @user.appointments.past_appointments
+    @user = PatientUser.find(params[:id])
+    @upcoming_bookings = @user.upcoming_appointments
+    @pending_bookings = @user.pending_appointments
+    @past_appointments = @user.past_appointments
     @doctors = DoctorUser.all
     params[:header_template] = 'header_darked'
   end

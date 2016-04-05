@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <%= df.input :days, label: false, checked: @user.days,
         collection: [["Mon",1], ["Tue",2], ["Wed",3], ["Thu",4], ["Fri",5], ["Sat",6], ["Sun",7]],
-        as: :check_boxes, boolean_style: :inline, wrapper_html: { class: 'form-group form-inline' } %>
+        as: :check_boxes, boolean_style: :inline, wrapper_html: { class: 'form-group form-inline text-center' } %>
     </div>
   </div>
 <% end %>

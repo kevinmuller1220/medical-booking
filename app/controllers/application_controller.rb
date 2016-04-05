@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   before_action :initialize_omniauth_state
+  before_action :notify_user
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to account_url, :alert => exception.message
@@ -37,8 +38,11 @@ class ApplicationController < ActionController::Base
   private
 
   def notify_user
-    if signed_in?
-      @notifications = auth_user.appointments.starting_next_hour
+    if patient_signed_in?
+      @notifications = PatientUser.find(auth_user.id).upcoming_appointments
+    end
+    if doctor_signed_in?
+      @notifications = DoctorUser.find(auth_user.id).upcoming_appointments
     end
   end
 end

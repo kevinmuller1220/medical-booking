@@ -90,6 +90,12 @@
 	.sm-text-center {
 		text-align: center;
 	}
+	.sm-push-left {
+		float: left;
+	}
+	.sm-push-right {
+		float: right;
+	}
 	/* Form Inline
 	----------------------------------------------------------------------------- */
 	.form-inline-group.row {
@@ -121,6 +127,12 @@
 	  border-bottom-right-radius: 0;
 	  border-right-color: transparent;
 	  width: 100%;
+	}
+
+	.book-upcoming {
+		.btn + .btn {
+			margin-left: 35px;
+		}
 	}
 }
 
@@ -168,9 +180,20 @@
 	}
 	.white-bg-box {
 		padding: 30px 15px;
+		.marg-both-side-none {
+			margin-left: 0;
+			margin-right: 0;
+		}
+		.subbnav-box {
+			font-size: 14px;
+		}
 		& > hr {
 			margin-left: -15px;
 			margin-right: -15px;
+		}
+		.row-height,
+		.col-height   {
+			display: block;
 		}
 	}
 	.time-box {
@@ -237,22 +260,9 @@ and (orientation : landscape) {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
-    
+
 	/* .header .site-logo {
         background: url("../images/logo@2x.png") no-repeat;
         background-size: 100%;
     } */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,23 +1,4 @@
 $( document ).ready(function() {
-  $(document).on('click', '#add-event', function (data){
-    formData = $('form').serializeArray();
-    var data = { appointments: {}, users: {} }
-    formData.forEach(function(element, index){
-      data['appointments'][element['name']] = element['value']
-    });
-    data['users']['id'] = parseInt(window.location.href.split("/")[window.location.href.split("/").length - 2])
-    $.ajax({
-      type: "POST",
-      url: "/appointments",
-      data: data,
-      success: function(data) {
-        window.location = window.location.href
-      },
-      error: function(data) {
-        console.log(data)
-      }
-    })
-  });
 
   $('#reSchedule').on('click', function(data) {
     formData = $('form').serializeArray();
@@ -39,52 +20,6 @@ $( document ).ready(function() {
     })
   })
 
-  $(document).on('click', '#update-event', function(data) {
-    formData = $('form').serializeArray();
-    var data = { appointments: {}, users: {} }
-    formData.forEach(function(element, index){
-      data['appointments'][element['name']] = element['value']
-    });
-    console.log("Updating", data)
-    $.ajax({
-      type: "PUT",
-      url: "/appointments/" + data['appointments']['id'],
-      data: {'appointments': data['appointments'] },
-      success: function(data) {
-        window.location = window.location.href
-      },
-      error: function(data) {
-        console.log(data)
-      }
-    })
-  })
-
-  $(document).on('click', '#import-event', function(data) {
-    formData = $('form').serializeArray();
-    var data = { appointments: {}, users: {} }
-    formData.forEach(function(element, index){
-      data['appointments'][element['name']] = element['value']
-    });
-    console.log("Importing", data)
-    $.ajax({
-      type: "POST",
-      url: "/appointments/"+ data['appointments']['id'] +"/import",
-      data: {'appointments': data['appointments'] },
-      success: function(data) {
-        console.log('boki')
-      },
-      error: function(data) {
-        console.log(data)
-      }
-    })
-  })
-
-
-  $("#cancel").on('click', function() {
-    var that = $(this).closest('tr');
-    that.hide();
-  })
-
   $(document).on("ajax:success", "a[data-remote]", function(e, data, status, xhr) {
     $(this).closest('.booking-box').slideUp(300, function() {
       $(this).remove();
@@ -104,6 +39,22 @@ $(function() {
       $('#target').html(img);
     }
     reader.readAsDataURL(image);
-    console.log(files);
   });
 });
+
+function getFirstdayOfWeek() {
+  var curr = new Date; // get current date
+  var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+  var firstday = new Date(curr.setDate(first));
+  console.log(firstday.toString());
+  return firstday;
+}
+
+function getCurHour() {
+  var start = moment();
+  remainder = (30 - start.minute()) % 30;
+  diff_sec = start.second();
+  var retval = moment(start).add(remainder, "minutes").subtract(diff_sec, "seconds");
+  console.log(retval);
+  return retval;
+}

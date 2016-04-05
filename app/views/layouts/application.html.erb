@@ -7,10 +7,13 @@ end
 <html>
 <head>
   <title>MedicalBooking</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic,700,300' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Dosis:400,600,700,500' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= yield :head_extra %>
 </head>
 <body>
 <header class="header <%= params[:header_template] %>">
@@ -24,13 +27,14 @@ end
   </div>
 <% end %>
 <%= yield %>
-<% if !signed_in? %>
 <%= render partial: 'layouts/footer' %>
+<% if !signed_in? %>
 <%= render partial: 'shared/popup_signup' %>
 <%= render partial: 'shared/popup_login' %>
 <%= render partial: 'shared/popup_reset_password' %>
 <% end %>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= yield :footer_extra %>
 </body>
 </html>

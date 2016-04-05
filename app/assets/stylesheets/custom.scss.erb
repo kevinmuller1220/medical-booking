@@ -186,6 +186,14 @@
 	&.header_darked {
 		background-color: #404040;
 	}
+	.navbar-header {
+		position: relative;
+		z-index: 1;
+	}
+}
+
+.bg-white {
+	background-color: #fff;
 }
 
 // Top search bar
@@ -202,7 +210,26 @@ h1, .h1, h2, .h2 {
 }
 h1, .h1 {
   margin-bottom: 25px;
+	font-weight: 100;
 }
+h2, .h2 {
+	font-weight: 100;
+}
+h3, .h3 {
+  font-weight: 100;
+}
+h4, .h4 {
+  font-weight: 100;
+}
+h5, .h5 {
+  font-weight: 100;
+}
+.alert-primary {
+  background-color: $brand-primary;
+  border-color: #ded2c1;
+  color: #fff;
+}
+
 // Registration Form Related
 .time-box {
 	select.form-control {
@@ -249,4 +276,19 @@ h1, .h1 {
 // Schedule table in doctor account page
 .week-days table.week-schedule tr td h6 {
 	margin: 0;
+}
+
+.book-upcoming .button_to {
+	display: inline-block;
+	+ .button_to {
+		margin-left: 35px;
+	}
+}
+
+.header .navbar-nav > li.notification-dropdown .dropdown-menu li strong {
+	white-space: nowrap;
+}
+
+#calendar .fc-bgevent {
+	background-color: #bbb;
 }
