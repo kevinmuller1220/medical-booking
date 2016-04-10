@@ -10,7 +10,14 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def google_oauth2
-    puts request.env["omniauth.auth"]
+    omniauth_callback
+  end
+
+  def facebook
+    omniauth_callback
+  end
+
+  def omniauth_callback
     auth = request.env['omniauth.auth']
     @identity = Identity.find_with_omniauth(auth)
     if @identity.nil?
@@ -57,9 +64,6 @@ class Users::OmniauthCallbacksController < ApplicationController
     end
     @token = auth["credentials"]["token"]
     session[:token] = @token
-  end
-
-  def facebook
   end
 
   def failure

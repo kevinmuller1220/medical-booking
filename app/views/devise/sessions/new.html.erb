@@ -4,12 +4,12 @@
 		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 			<div class="row">
 				<div class="col-sm-12">
-					<p>
-						<a class="btn btn-sm btn-block btn-soc btn-facebook" href="#">
+					<!--<p>
+						<%= link_to(omniauth_authorize_path(:facebook), class: 'btn btn-block btn-sm btn-soc btn-facebook', target: '_blank') do %>
 							<i class="fa fa-facebook"></i>
 							<span>Login with Facebook</span>
-						</a>
-					</p>
+						<% end %>
+					</p>-->
 					<p>
 						<%= link_to(omniauth_authorize_path(:google_oauth2), class: 'btn btn-block btn-sm btn-soc btn-google', target: '_blank') do %>
 							<i class="fa fa-google-plus"></i>

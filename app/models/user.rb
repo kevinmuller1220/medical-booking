@@ -39,6 +39,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def google_oauth2
+    identities.where( :provider => "google_oauth2" ).first
+  end
+
+  def facebook
+    identities.where( :provider => "facebook" ).first
+  end
+
   def disconnect_from_google
     self.identities.find_with_provider('google_oauth2').destroy
   end
