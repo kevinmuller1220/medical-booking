@@ -14,7 +14,14 @@
                   <% else %>
                     <%
                     browser_address = ''
-                    location = request.location
+                    begin
+                      location = request.location
+                    rescue => e
+                      # handle the error here
+                      logger.debug "http://freegeoip.net must be down!"
+                      logger.debug e.message
+                    end
+
                     if location.present?
                       browser_address = "#{location.address}, #{location.city}, #{location.state}, #{location.postal_code}, #{location.country}"
                     end
