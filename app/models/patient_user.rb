@@ -3,7 +3,7 @@ class PatientUser < User
   has_many :booked_hours, foreign_key: 'patient_user_id', dependent: :delete_all
   has_many :doctor_users, through: :booked_hours
 
-  has_many :reviews, foreign_key: 'doctor_user_id', dependent: :delete_all
+  # has_many :reviews, foreign_key: 'doctor_user_id', dependent: :delete_all
 
   before_create :validate_type
   def validate_type

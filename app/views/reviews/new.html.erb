@@ -1,0 +1,103 @@
+<%= content_for(:footer_extra) do %>
+<script type="text/javascript">
+$(document).on('ready', function() {
+  $('.stars-box').on('mouseenter', '.star', function() {
+    var $this = $(this);
+    var $starbox = $this.closest('.stars-box');
+    $starbox.find('.star').removeClass('active');
+  });
+
+  $('.stars-box').on('mouseleave', '.star', function() {
+    var $this = $(this);
+    var $starbox = $this.closest('.stars-box');
+    var star_val = $('#review_' + $starbox.data('field')).val();
+    $starbox.find('.star-' + star_val).addClass('active');
+  });
+
+  $('.stars-box').on('click', '.star', function() {
+    var $this = $(this);
+    var $starbox = $this.closest('.stars-box');
+    var star_val = $this.data('value');
+    $this.addClass('active');
+    $('#review_' + $starbox.data('field')).val(star_val);
+  })
+})
+</script>
+<% end %>
+<%
+pa = @appointment
+doctor = pa.doctor_user
+%>
+<section class="section">
+  <div class="container container-lg">
+
+    <div class="white-bg-box visited-booking-box">
+      <div class="row booking-item">
+        <div class="col-lg-4 col-sm-3 col-xs-12">
+          <div class="doctor-info">
+            <div class="doctor-photo md-more-float-left">
+              <div class="img">
+                <%= image_tag doctor.avatar(:medium), alt: doctor.full_name %>
+              </div>
+            </div>
+            <h4><%= doctor.full_name %></h4>
+            <%= render 'shared/rating', score: doctor.feedback_score %>
+            <a class="review-count" href="#"><%= doctor.feedback_count %> reviews</a>
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-9 col-xs-12 visit-info">
+          <div class="row subtitles">
+            <div class="col-sm-2">Visit date</div>
+            <div class="col-sm-2">Start time</div>
+            <div class="col-sm-2">End time</div>
+            <div class="col-sm-3">Speciality</div>
+            <div class="col-sm-3">Reason</div>
+          </div>
+          <div class="row visitad-data">
+            <div class="col-sm-2"><%= formatted_date(pa.from) %></div>
+            <div class="col-sm-2"><%= formatted_time(pa.from, true) %></div>
+            <div class="col-sm-2"><%= formatted_time(pa.to, true) %></div>
+            <div class="col-sm-3"><%= doctor.speciality %></div>
+            <div class="col-sm-3"><%= pa.title %></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="white-bg-box push-bot-20 send-review-box">
+    	<div class="row">
+    		<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+    			<div class="section-title">
+    				<h3>Write a review</h3>
+    			</div>
+    			<%= simple_form_for(@review, url: appointment_reviews_path(pa.id), html: { method: :post }) do |f| %>
+    				<div class="row text-center push-bot-20">
+    					<div class="col-sm-offset-4 col-sm-4">
+    						<div class="stars-box" data-field="avg_score">
+    							<span class="star star-5" data-value="5"></span>
+    							<span class="star star-4" data-value="4"></span>
+    							<span class="star star-3" data-value="3"></span>
+    							<span class="star star-2" data-value="2"></span>
+    							<span class="star star-1" data-value="1"></span>
+    						</div>
+    					</div>
+    				</div>
+    				<div class="row">
+    					<div class="col-xs-12">
+    						<div class="form-group push-bot-30">
+                  <%= f.input :avg_score, as: :hidden %>
+                  <%= f.input :feedback, label: false, input_html: { class: 'form-control', rows: 5 } %>
+    						</div>
+    					</div>
+    					<div class="col-sm-12 text-center double-box-btns">
+    						<button type="submit" class="btn btn-primary" href="#"> Leave review</button>
+    					</div>
+    				</div>
+    			<% end %>
+    		</div>
+    	</div>
+    </div>
+  </div>
+</div>

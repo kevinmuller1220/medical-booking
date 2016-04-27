@@ -2,9 +2,8 @@ class DoctorUser < User
   has_many :booked_hours, foreign_key: 'doctor_user_id', dependent: :delete_all
   has_many :patient_users, through: :booked_hours
 
-  has_many :reviews, foreign_key: 'doctor_user_id', dependent: :delete_all
+  # has_many :reviews, foreign_key: 'doctor_user_id', dependent: :delete_all
 
-  # has_many :open_hours
   has_one :doctor_info, dependent: :delete
 
   # accepts_nested_attributes_for :open_hours, :allow_destroy => true
@@ -95,9 +94,29 @@ class DoctorUser < User
     end
   end
 
+  def feedback_count
+    if self.doctor_info.present?
+      return self.doctor_info.feedback_count
+    else
+      return '0'
+    end
+  end
+
+  def feedback_score
+    if self.doctor_info.present?
+      return self.doctor_info.feedback_score
+    else
+      return 0
+    end
+  end
+
+  def reviews
+    Review.joins(:booked_hour).where("booked_hours.doctor_user_id = ?", self.id).order(updated_at: :desc).limit(10)
+  end
+
   # static
   def self.top_doctors
-    DoctorUser.all
+    DoctorUser.joins(:doctor_info).order('doctor_infos.feedback_score DESC').limit(6)
   end
 
   def import_from_google_calendar

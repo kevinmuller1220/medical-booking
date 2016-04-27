@@ -137,7 +137,9 @@ Speciality.all.each_with_index do |speciality, index|
       hours_from: '8:00',
       hours_to: '17:00',
       website: "http://example.com",
-      bio: bio_text
+      bio: bio_text,
+      feedback_count: 1,
+      feedback_score: 5
     )
   d.save!
   puts "\temail: #{d.email}, password: #{d.password}"

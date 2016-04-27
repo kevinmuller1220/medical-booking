@@ -102,14 +102,8 @@
                 <div class="col-md-8 col-sm-7 col-xs-12 info-box">
                   <h3><%= doctor.full_name %></h3>
                   <div>
-                    <!--<div class="stars-box">
-                      <span class="star star-5"></span>
-                      <span class="star star-4 active"></span>
-                      <span class="star star-3"></span>
-                      <span class="star star-2"></span>
-                      <span class="star star-1"></span>
-                    </div>
-                    <a class="review-count" href="#"><%= doctor.reviews.count %> reviews</a>-->
+                    <%= render 'shared/rating', score: doctor.feedback_score %>
+                    <a class="review-count" href="#"><%= doctor.feedback_count %> reviews</a>
                   </div>
                   <div class="location"><%= doctor.full_address %></div>
                   <div class="location-time"> 35 minutes , from your location</div>

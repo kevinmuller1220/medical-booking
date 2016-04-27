@@ -5,7 +5,9 @@
         <div class="col-sm-9 push-bot-10">
           <h1 class="h2 dsp-inline-block">Dr. <%= @user.full_name %></h1>
           <div class="review-s dsp-inline-block">
-            <% if @user.house_calls %>Does at home visits<% end %>
+            <% doctor = @user %>
+            <%= render 'shared/rating', score: doctor.feedback_score %>
+            <a class="review-count" href="#"><%= doctor.feedback_count %> reviews</a>
           </div>
         </div>
         <div class="col-sm-3 sm-text-right xs-text-center push-bot-10">
@@ -89,24 +91,52 @@
   <% if patient_signed_in? %>
     <h2 id="book-appointment" class="push-bot-20 text-center">Book an Appointment</h2>
 
-      <div class="white-bg-box xs-text-center push-bot-20">
-        <%= simple_form_for(@appointment, url: appointments_path) do |f| %>
-          <div class="row push-bot-40">
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
-              <%= f.input :from, as: :hidden %>
-              <%= f.input :to, as: :hidden %>
-              <%= f.input :patient_user_id, as: :hidden %>
-              <%= f.input :doctor_user_id, as: :hidden %>
-              <%= f.input :title, label: false, collection: @reasons, prompt: "What is the reason for your visit?", input_html: { class: 'form-control' } %>
-            </div>
+    <div class="white-bg-box xs-text-center push-bot-20">
+      <%= simple_form_for(@appointment, url: appointments_path) do |f| %>
+        <div class="row push-bot-40">
+          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+            <%= f.input :from, as: :hidden %>
+            <%= f.input :to, as: :hidden %>
+            <%= f.input :patient_user_id, as: :hidden %>
+            <%= f.input :doctor_user_id, as: :hidden %>
+            <%= f.input :title, label: false, collection: @reasons, prompt: "What is the reason for your visit?", input_html: { class: 'form-control' } %>
           </div>
-        <% end %>
+        </div>
+      <% end %>
 
-        <div id='calendar'></div>
-      </div>
+      <div id='calendar'></div>
     </div>
   <% end %>
 
+    <h2 class="push-bot-0">Patient Reviews</h2>
+    <p class="push-bot-20">All reviews are from verified patients</p>
+    <% if @user.reviews.present? %>
+    <div class="white-bg-box xs-text-center">
+      <% @user.reviews.each_with_index do |review, index| %>
+        <div class="row comment-box comment-box-inline">
+          <div class="col-xs-12">
+            <div class="comment-data">
+              <p><%= formatted_date(review.updated_at) %> <span>by <%= review.booked_hour.patient_user.full_name %></span></p>
+            </div>
+          </div>
+          <div class="col-sm-9 col-xs-12">
+            <div class="comment-text">
+              <p><%= review.feedback %></p>
+            </div>
+          </div>
+          <div class="col-sm-3 col-xs-12">
+            <div class="row text-center">
+              <div class="col-sm-12">
+                <%= render 'shared/rating', score: review.avg_score %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% else %>
+    <h4>No reviews yet</h4>
+    <% end %>
   </div>
 </section>
 

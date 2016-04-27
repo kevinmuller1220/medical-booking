@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403164836) do
+ActiveRecord::Schema.define(version: 20160426132000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20160403164836) do
     t.text     "bio"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "feedback_count", default: 0
+    t.float    "feedback_score"
   end
 
   create_table "identities", force: :cascade do |t|
@@ -66,15 +68,14 @@ ActiveRecord::Schema.define(version: 20160403164836) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text     "body"
-    t.integer  "doctor_user_id"
-    t.integer  "patient_user_id"
+    t.integer  "appointment_id"
+    t.text     "feedback"
+    t.float    "avg_score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "reviews", ["doctor_user_id"], name: "index_reviews_on_doctor_user_id", using: :btree
-  add_index "reviews", ["patient_user_id"], name: "index_reviews_on_patient_user_id", using: :btree
+  add_index "reviews", ["appointment_id"], name: "index_reviews_on_appointment_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

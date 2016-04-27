@@ -1,10 +1,9 @@
 class CreateReviews < ActiveRecord::Migration
   def change
     create_table :reviews do |t|
-      t.text :body
-      t.integer :doctor_user_id, index: true
-      t.integer :patient_user_id, index: true
-
+      t.integer :appointment_id, index: true
+      t.text :feedback
+      t.float :avg_score
       t.timestamps
     end
   end

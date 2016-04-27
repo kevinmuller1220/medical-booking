@@ -166,14 +166,12 @@
                   </div>
                 </div>
                 <h4><%= doctor.full_name %></h4>
-                <!--<div class="stars-box">
-                  <span class="star star-5"></span>
-                  <span class="star star-4 active"></span>
-                  <span class="star star-3"></span>
-                  <span class="star star-2"></span>
-                  <span class="star star-1"></span>
-                </div>
-                <a class="review-count" href="#"><%= doctor.reviews.count %> reviews</a>-->
+                <% if pa.review.present? %>
+                  <%= render 'shared/rating', score: pa.review.avg_score %>
+                <% end %>
+                <% if !pa.has_feedback? %>
+                  <a href="<%= new_appointment_review_path(pa.id) %>">Leave feedback</a>
+                <% end %>
               </div>
             </div>
             <div class="col-lg-8 col-sm-9 col-xs-12 visit-info">

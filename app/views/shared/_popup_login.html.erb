@@ -3,6 +3,12 @@
 		<%= form_for(User.new, as: resource_name, url: session_path(resource_name)) do |f| %>
 			<div class="row">
 				<div class="col-sm-12">
+					<!--<p>
+						<%= link_to(omniauth_authorize_path(:facebook), class: 'btn btn-sm btn-block btn-soc btn-facebook') do %>
+							<i class="fa fa-facebook"></i>
+							<span>Login with Facebook</span>
+						<% end %>
+					</p>-->
 					<p>
 						<%= link_to(omniauth_authorize_path(:google_oauth2), class: 'btn btn-block btn-sm btn-soc btn-google') do %>
 							<i class="fa fa-google-plus"></i>

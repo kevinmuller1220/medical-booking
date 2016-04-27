@@ -11,7 +11,7 @@ body {
 		<div class="row">
 			<div class="col-md-12 section-title">
 				<h2>Top categories</h2>
-				<h5>Selected Services", sub-headline to "Our convenient booking interface connects to our base of pre-selected providers for minimally invasive aesthetic procedures from the comfort of your home, office, or at the provider facility, seamlessly.</h5>
+				<h5>Our convenient booking interface connects to our base of pre-selected providers for minimally invasive aesthetic procedures from the comfort of your home, office, or at the provider facility, seamlessly.</h5>
 			</div>
 		</div>
 		<div class="row top-categories-grid">
@@ -192,13 +192,7 @@ body {
 							<h4>Dr. <%= doctor.full_name %></h4>
 							<p class="vocation"><%= doctor.speciality %></p>
 							<div class="hover">
-								<!--<div class="stars-box">
-									<span class="star star-5 active"></span>
-									<span class="star star-4"></span>
-									<span class="star star-3"></span>
-									<span class="star star-2"></span>
-									<span class="star star-1"></span>
-								</div>-->
+								<%= render 'shared/rating', score: doctor.feedback_score %>
 								<p class="address"><%= doctor.full_address %></p>
 								<div class="map-wrap">
 									<div class="map-box">
@@ -286,10 +280,9 @@ body {
 			<div class="post-item bigger">
 				<div class="col-md-4 col-sm-6 post-info">
 					<h4>Story of the week</h4>
-					<h5>Corned beef jerky swine t-bone.</h5>
-					<div class="excerpt">Frankfurter short ribs prosciutto venison
-					pancetta t-bone. filet mignon beef kielbasa
-					owl boudin prosciutto loin tail...</div>
+					<h5>This is an example story</h5>
+					<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
 					<a class="more-link" href="#">Read more</a>
 				</div>
 				<div class="col-md-8 col-sm-6">
