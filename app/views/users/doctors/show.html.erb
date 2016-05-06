@@ -7,7 +7,7 @@
           <div class="review-s dsp-inline-block">
             <% doctor = @user %>
             <%= render 'shared/rating', score: doctor.feedback_score %>
-            <a class="review-count" href="#"><%= doctor.feedback_count %> reviews</a>
+            <a class="review-count" href="#reviews"><%= doctor.feedback_count %> reviews</a>
           </div>
         </div>
         <div class="col-sm-3 sm-text-right xs-text-center push-bot-10">
@@ -108,7 +108,7 @@
     </div>
   <% end %>
 
-    <h2 class="push-bot-0">Patient Reviews</h2>
+    <h2 class="push-bot-0" id="reviews">Patient Reviews</h2>
     <p class="push-bot-20">All reviews are from verified patients</p>
     <% if @user.reviews.present? %>
     <div class="white-bg-box xs-text-center">

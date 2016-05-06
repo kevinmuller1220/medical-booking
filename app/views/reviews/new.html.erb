@@ -1,20 +1,20 @@
 <%= content_for(:footer_extra) do %>
 <script type="text/javascript">
 $(document).on('ready', function() {
-  $('.stars-box').on('mouseenter', '.star', function() {
+  $('.send-review-box .stars-box').on('mouseenter', '.star', function() {
     var $this = $(this);
     var $starbox = $this.closest('.stars-box');
     $starbox.find('.star').removeClass('active');
   });
 
-  $('.stars-box').on('mouseleave', '.star', function() {
+  $('.send-review-box .stars-box').on('mouseleave', '.star', function() {
     var $this = $(this);
     var $starbox = $this.closest('.stars-box');
     var star_val = $('#review_' + $starbox.data('field')).val();
     $starbox.find('.star-' + star_val).addClass('active');
   });
 
-  $('.stars-box').on('click', '.star', function() {
+  $('.send-review-box .stars-box').on('click', '.star', function() {
     var $this = $(this);
     var $starbox = $this.closest('.stars-box');
     var star_val = $this.data('value');
@@ -42,7 +42,7 @@ doctor = pa.doctor_user
             </div>
             <h4><%= doctor.full_name %></h4>
             <%= render 'shared/rating', score: doctor.feedback_score %>
-            <a class="review-count" href="#"><%= doctor.feedback_count %> reviews</a>
+            <a class="review-count" href="<%= doctor_path(doctor.id, anchor: 'reviews') %>"><%= doctor.feedback_count %> reviews</a>
           </div>
         </div>
         <div class="col-lg-8 col-sm-9 col-xs-12 visit-info">

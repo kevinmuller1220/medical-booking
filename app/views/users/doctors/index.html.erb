@@ -103,7 +103,7 @@
                   <h3><%= doctor.full_name %></h3>
                   <div>
                     <%= render 'shared/rating', score: doctor.feedback_score %>
-                    <a class="review-count" href="#"><%= doctor.feedback_count %> reviews</a>
+                    <a class="review-count" href="<%= doctor_path(doctor.id, anchor: 'reviews') %>"><%= doctor.feedback_count %> reviews</a>
                   </div>
                   <div class="location"><%= doctor.full_address %></div>
                   <div class="location-time"> 35 minutes , from your location</div>

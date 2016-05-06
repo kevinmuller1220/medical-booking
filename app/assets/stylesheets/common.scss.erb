@@ -692,6 +692,29 @@ select.form-control {
 		color: inherit;
 		@include transition-all;
 		color: #f6c10a;
+		&:before {
+			content: '\f006';
+			font-family: FontAwesome;
+			@include transition-all;
+		}
+		&.active ~ .star:before,
+		&.active:before {
+			content: '\f005';
+		}
+	}
+	& + .label {
+		font-size: 13px;
+		color: #000;
+		font-weight: 400;
+		display: block;
+		float: none;
+		margin-bottom: 12px;
+		line-height: 100%;
+	}
+}
+.send-review-box .stars-box {
+	.star{
+		cursor: pointer;
 		&:hover:before {
 			content: '\f005';
 		}
@@ -703,20 +726,6 @@ select.form-control {
 		&:hover {
 			@include scale(1.25);
 		}
-		&:before {
-			content: '\f006';
-			font-family: FontAwesome;
-			@include transition-all;
-		}
-	}
-	& + .label {
-		font-size: 13px;
-		color: #000;
-		font-weight: 400;
-		display: block;
-		float: none;
-		margin-bottom: 12px;
-		line-height: 100%;
 	}
 }
 
