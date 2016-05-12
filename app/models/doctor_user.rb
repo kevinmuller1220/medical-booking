@@ -1,3 +1,5 @@
+require 'google/apis/calendar_v3'
+
 class DoctorUser < User
   has_many :booked_hours, foreign_key: 'doctor_user_id', dependent: :delete_all
   has_many :patient_users, through: :booked_hours
@@ -22,7 +24,9 @@ class DoctorUser < User
   }
   scope :by_top_doctors, -> top_doctors {
     if top_doctors == 'true'
-      limit(4)
+      joins(:doctor_info)
+      .order('doctor_infos.feedback_count DESC')
+      .by_name_order('ASC')
     end
   }
 
@@ -120,10 +124,12 @@ class DoctorUser < User
   end
 
   def import_from_google_calendar
-    identity = self.identities.find_by_provider('google_oauth2')
+    identity = self.identities.find_with_provider('google_oauth2')
     return false if identity.nil?
 
-    client = Signet::OAuth2::Client.new(access_token: identity.token)
+    client = Signet::OAuth2::Client.new(
+      access_token: identity.token
+    )
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
     limit = 1000
@@ -169,7 +175,7 @@ class DoctorUser < User
   end
 
   def upcoming_appointments
-    self.booked_hours.approved.where('booked_hours.from >= ?', Time.now).order('booked_hours.from DESC')
+    self.booked_hours.approved.where('booked_hours.from >= ?', Time.now).where('patient_user_id IS NOT NULL').order('booked_hours.from DESC')
   end
 
   def pending_appointments
@@ -181,6 +187,42 @@ class DoctorUser < User
       .where('booked_hours.patient_user_id IS NOT NULL')
       .where('booked_hours.from < ? OR booked_hours.status = ?', Time.now, BookedHour.statuses[:approved]).order('booked_hours.from DESC')
   end
+
+
+  def update_reviews!
+    doctor_info = self.doctor_info
+    if doctor_info.present?
+      doctor_info.feedback_score = Review.joins(:booked_hour).where("booked_hours.doctor_user_id = ?", self.id).average(:avg_score)
+      doctor_info.feedback_count = Review.joins(:booked_hour).where("booked_hours.doctor_user_id = ?", self.id).count
+      doctor_info.save!
+    end
+  end
+  
+  def self.export_to_yaml_file
+    file_path ||= File.join(Rails.root, 'data/doctors.yml')
+    File.open(file_path, 'w+') {
+      |f| f << DoctorUser.joins(:doctor_info).joins('LEFT OUTER JOIN specialities ON doctor_infos.speciality_id = specialities.id').select(
+        :first_name,
+        :last_name,
+        :email,
+        :avatar_file_name,
+        :bio,
+        'specialities.name as speciality'
+      ).order(:id).to_yaml
+    }
+  end
+
+  # def self.import_from_yaml_file
+  #   h = YAML::load_file( File.join(Rails.root, 'data/doctors.yml' ) )
+  #   list = h.is_a?(Array) ? h : h.values.first
+  #   list.each do |yml_record|
+  #     record = where(id: yml_record.id) || new
+  #     record.attributes = yml_record.attributes.select{|attr| attr.to_s != 'id' }
+  #     puts "#{record.new_record? ? '+' : '*'} %16s | %24s" % [record.email, record.full_name] if Rails.env.development?
+  #     record.save
+  #   end
+  #   puts "|- Loaded #{list.count} doctors"
+  # end
 
   private
 
@@ -196,15 +238,32 @@ class DoctorUser < User
   end
 
   def merge_hours(a, b)
-    if a.title.include?(b.title)
-      new_title = a.title
-      new_status = a.status
-    elsif b.title.include?(a.title)
-      new_title = a.title
-      new_status = b.status
-    else
-      new_title = "#{a.title}, #{b.title}"
-      new_status = BookedHour.statuses[:imported]
+    neq = false
+    if a.from == b.from && a.to == b.to
+      if a.status == BookedHour.statuses[:imported]
+        # new_title = b.title
+        # new_status = b.status
+        return b
+      elsif b.status == BookedHour.statuses[:imported]
+        # new_title = a.title
+        # new_status = a.status
+        return a
+      else
+        neq = true
+      end
+    end
+
+    if neq
+      if a.title.include?(b.title)
+        new_title = a.title
+        new_status = a.status
+      elsif b.title.include?(a.title)
+        new_title = b.title
+        new_status = b.status
+      else
+        new_title = "#{a.title}, #{b.title}"
+        new_status = BookedHour.statuses[:imported]
+      end
     end
 
     bh = BookedHour.new(
@@ -237,4 +296,5 @@ class DoctorUser < User
       Time.at((time.to_f / seconds).floor * seconds)
     end
   end
+
 end

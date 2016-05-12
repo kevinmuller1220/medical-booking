@@ -1,7 +1,7 @@
-<div class="stars-box">
-  <span class="star star-5<%= score == 5 ? ' active' : '' %>"></span>
-  <span class="star star-4<%= score == 4 ? ' active' : '' %>"></span>
-  <span class="star star-3<%= score == 3 ? ' active' : '' %>"></span>
-  <span class="star star-2<%= score == 2 ? ' active' : '' %>"></span>
-  <span class="star star-1<%= score == 1 ? ' active' : '' %>"></span>
+<div class="stars-box" title="<%= score.present? ? score : 'No feedback yet' %>">
+  <span class="star star-5<%= score.present? && score == 5 ? ' active' : '' %>"></span>
+  <span class="star star-4<%= score.present? && score >= 4 && score < 5 ? ' active' : '' %>"></span>
+  <span class="star star-3<%= score.present? && score >= 3 && score < 4 ? ' active' : '' %>"></span>
+  <span class="star star-2<%= score.present? && score >= 2 && score < 3 ? ' active' : '' %>"></span>
+  <span class="star star-1<%= score.present? && score >= 1 && score < 2 ? ' active' : '' %>"></span>
 </div>

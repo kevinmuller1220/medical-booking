@@ -35,7 +35,7 @@ class AppointmentsController < ApplicationController
   def approve
     if doctor_signed_in?
       @app = BookedHour.find(params[:id])
-      @app.approved!
+      @app.approve_appointment!
       render json: {data: {appointment: @app}, status: :success}
     else
       render json: {status: :fail}

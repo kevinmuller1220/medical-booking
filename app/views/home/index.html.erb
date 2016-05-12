@@ -184,10 +184,10 @@ body {
 			</div>
 		</div>
 		<div class="row top-doctors-list">
-			<% DoctorUser.by_top_doctors(true).each_with_index do |doctor, index| %>
+			<% DoctorUser.by_top_doctors('true').each_with_index do |doctor, index| %>
 				<% if index >= 4 then break end %>
 				<div class="col-sm-3">
-					<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-' << (index+1).to_s << '.jpg') %>);">
+					<div class="doctor-box" style="background-image: url(<%= asset_url(doctor.avatar :medium) %>);">
 						<div class="doctor-info">
 							<h4>Dr. <%= doctor.full_name %></h4>
 							<p class="vocation"><%= doctor.speciality %></p>

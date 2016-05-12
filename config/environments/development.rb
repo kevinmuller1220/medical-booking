@@ -38,3 +38,9 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost' }
   config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
 end
+
+ENV["GOOGLE_CLIENT_ID"] = "320531325879-o3qje4ahq97v1164b0h9li0o6ol783s5.apps.googleusercontent.com"
+ENV["GOOGLE_CLIENT_SECRET"] = "9EzmVgwOBbZx_oynux2TxaMr"
+
+ENV["FACEBOOK_CLIENT_ID"] = "1680177442238628"
+ENV["FACEBOOK_CLIENT_SECRET"] = "a80dd492dea78d910dc0b566591b6b2f"

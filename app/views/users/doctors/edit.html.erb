@@ -1,6 +1,18 @@
+<%= content_for(:head_extra) do %>
+  <%= stylesheet_link_tag    'bootstrap-wysihtml5/bootstrap3-wysihtml5', media: 'all', 'data-turbolinks-track' => true %>
+<% end %>
+<%= content_for(:footer_extra) do %>
+  <%= javascript_include_tag 'bootstrap-wysihtml5', 'data-turbolinks-track' => true %>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      $('.wysihtml5').wysihtml5();
+    });
+  </script>
+<% end %>
+
 <section class="section">
   <div class="container container-lg">
-    <% if @pending_bookings.present? %>
+    <% if @pending_bookings.present? && @pending_bookings.count > 0 %>
       <div class="row">
         <div class="col-sm-12">
           <h2 class="h1">Pending appointments</h2>
@@ -256,8 +268,8 @@
         </div>
         <%= f.simple_fields_for :doctor_info do |df| %>
         <div class="row push-bot-30">
-          <div class="col-sm-12 form-group">
-            <%= df.input :bio, as: :text, input_html: { rows: 10, class: 'form-control', placeholder: 'Bio' } %>
+          <div class="col-sm-12 form-group bio-editor">
+            <%= df.input :bio, as: :text, input_html: { rows: 10, class: 'form-control wysihtml5', placeholder: 'Bio' } %>
           </div>
         </div>
         <% end %>

@@ -57,7 +57,9 @@
       <div class="row">
         <div class="col-sm-12">
           <h3>Doctor's Bio</h3>
-          <%= @user.bio %>
+          <div class="bio-text">
+            <%= raw @user.bio %>
+          </div>
         </div>
       </div>
       <div class="row">

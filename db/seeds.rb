@@ -91,38 +91,43 @@ specialities_services = [
   }
 ]
 
-puts '-- Adding predefined specialities and services'
-specialities_services.each do |speciality|
-  s = Speciality.new
-    s.name = speciality[:name]
-  s.save!
-  speciality[:services].each do |service|
-    sv = Service.new
-    sv.name = service
-    sv.speciality_id = s.id
-    sv.save!
-  end
-end
-puts '-- Done'
+# puts '-- Adding predefined specialities and services'
+# specialities_services.each do |speciality|
+#   s = Speciality.new
+#     s.name = speciality[:name]
+#   s.save!
+#   speciality[:services].each do |service|
+#     sv = Service.new
+#     sv.name = service
+#     sv.speciality_id = s.id
+#     sv.save!
+#   end
+# end
+# puts '-- Done'
 
-# Add a admin user
-puts '-- Adding a admin user with email: admin@example.com and password: password'
-admin = AdminUser.new
-  admin.first_name = 'admin'
-  admin.last_name = 'user'
-  admin.email = 'admin@example.com'
-  admin.password = 'password'
-  admin.skip_confirmation!
-admin.save!
-puts '-- Done'
+# # Add a admin user
+# puts '-- Adding a admin user with email: admin@example.com and password: password'
+# admin = AdminUser.new
+#   admin.first_name = 'admin'
+#   admin.last_name = 'user'
+#   admin.email = 'admin@example.com'
+#   admin.password = 'password'
+#   admin.skip_confirmation!
+# admin.save!
+# puts '-- Done'
 
 # Add test doctors
 puts '-- Adding test doctors'
-Speciality.all.each_with_index do |speciality, index|
-  d = DoctorUser.new
-    d.first_name = first_names[index]
-    d.last_name = last_names[index]
-    d.email = "test_doctor#{index}@gmail.com"
+alt_speciality = Speciality.first
+
+h = YAML::load_file( File.join(Rails.root, 'data/doctors.yml' ) )
+list = h.is_a?(Array) ? h : h.values.first
+list.each_with_index do |yml_record, index|
+  speciality = Speciality.find_by_name(yml_record[:speciality]) || alt_speciality
+  d = DoctorUser.find_by_email(yml_record['email']) || DoctorUser.new
+    d.first_name = yml_record['first_name']
+    d.last_name = yml_record['last_name']
+    d.email = yml_record['email']
     d.phone = "9939992930"
     d.address = "Lombard Street"
     d.city = "San Francisco"
@@ -137,28 +142,34 @@ Speciality.all.each_with_index do |speciality, index|
       hours_from: '8:00',
       hours_to: '17:00',
       website: "http://example.com",
-      bio: bio_text,
-      feedback_count: 1,
-      feedback_score: 5
+      bio: yml_record['bio']
     )
+    avatar_path = File.join( Rails.root, "data/doctor_images/#{yml_record['avatar_file_name']}" )
+    if File.file?(avatar_path)
+      puts avatar_path
+      f = File.open(avatar_path)
+      d.avatar = f
+      f.close
+    end
   d.save!
+  d.update_reviews!
   puts "\temail: #{d.email}, password: #{d.password}"
 end
 puts '-- Done'
 
-# Add a test patient
-puts "-- Adding a test patient with email: test_patient@gmail.com, password: password"
-p = PatientUser.new
-  p.first_name = 'Test'
-  p.last_name = 'Patient'
-  p.email = "test_patient@gmail.com"
-  p.phone = "123456789"
-  p.address = "Beach Street"
-  p.city = "San Francisco"
-  p.state = "CA"
-  p.zipcode = "94133"
-  p.country = "US"
-  p.password = "password"
-  p.skip_confirmation!
-p.save!
-puts '-- Done'
+# # Add a test patient
+# puts "-- Adding a test patient with email: test_patient@gmail.com, password: password"
+# p = PatientUser.new
+#   p.first_name = 'Test'
+#   p.last_name = 'Patient'
+#   p.email = "test_patient@gmail.com"
+#   p.phone = "123456789"
+#   p.address = "Beach Street"
+#   p.city = "San Francisco"
+#   p.state = "CA"
+#   p.zipcode = "94133"
+#   p.country = "US"
+#   p.password = "password"
+#   p.skip_confirmation!
+# p.save!
+# puts '-- Done'

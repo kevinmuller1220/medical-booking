@@ -1,5 +1,3 @@
-require 'google/apis/calendar_v3'
-
 class Users::DoctorsController < ApplicationController
   before_filter :search_params, only: [:index]
   before_filter :verify_auth_user, except: [:index, :show, :booked_hours]
@@ -23,6 +21,7 @@ class Users::DoctorsController < ApplicationController
       @doctors = @doctors.send("by_distance_order", search_params[:distance_order], longitude, latitude)
     end
 
+    @doctors = @doctors.by_name_order('ASC')
     prep_search_params(search_params)
 
   end

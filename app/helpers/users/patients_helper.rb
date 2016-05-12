@@ -1,9 +1,9 @@
 module Users::PatientsHelper
   def formatted_time(time, ampm = false)
     if ampm
-      time.strftime("%l:%M %p")
+      time.getlocal.strftime("%l:%M %p")
     else
-      time.strftime("%H:%M")
+      time.getlocal.strftime("%H:%M")
     end
   end
   

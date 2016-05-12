@@ -7,9 +7,9 @@ gem 'rails', '4.2.5'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '~>3.3.3'
+gem 'bootstrap-sass', '~>3.3.6'
 gem 'autoprefixer-rails'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -45,6 +45,7 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem 'font-awesome-rails'
 # gem 'will_paginate', '~> 3.1.0'
+gem 'bootstrap-wysihtml5-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -69,3 +70,5 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'rails_12factor', group: :production
+
+gem 'whenever', :require => false
